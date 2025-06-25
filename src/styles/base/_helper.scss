@@ -1,0 +1,94 @@
+/**************************************************************************
+    ヘルパー (接頭辞 hp_)
+**************************************************************************/
+@use "../global" as g;
+@use "sass:math";
+
+// 特定のブレイクポイントで非表示にする
+//-------------------------------------------------------------------
+// .hp_md_none → ブレイクポイントがmd以上の場合は非表示
+@each $prefix, $value in g.$breakpoints {
+    @media #{$value} {
+        .hp_#{$prefix}_none { display: none!important; }
+    }
+}
+
+// display
+//-------------------------------------------------------------------
+@each $key, $val in (
+    b: block,
+    ib: inline-block,
+    f: flex,
+    if: inline-flex,
+    g: grid,
+    ig: inline-grid,
+    dn: none
+) {
+    .hp_d_#{$key} { display: $val!important; }
+}
+
+
+// 文字色・背景色
+//-------------------------------------------------------------------
+@each $key, $val in (
+    base: g.$color_base,
+    key: g.$color_key
+) {
+    .hp_c_#{$key} { color: $val!important; }
+    .hp_bc_#{$key} { background-color: $val!important; }
+}
+
+
+// font-weight
+//-------------------------------------------------------------------
+@each $key, $val in (
+    l: 300,
+    n: 400,
+    b: 700,
+    bl: 900
+) {
+    .hp_fw_#{$key} { font-weight: $val!important; }
+}
+
+// text-align
+//-------------------------------------------------------------------
+@each $key, $val in (
+    l: left,
+    c: center,
+    r: right
+) {
+    .hp_ta_#{$key} { text-align: $val!important; }
+}
+
+// フォントサイズ
+//-------------------------------------------------------------------
+// 1remから3remまで
+@for $i from 10 through 30 {
+    .hp_fs_#{$i} { font-size: #{math.div($i, 10)}rem!important; }
+}
+
+// 余白
+//-------------------------------------------------------------------
+// 5px刻みで5px~100pxまで
+@for $i from 1 through 20 {
+    // padding
+    .hp_p_#{$i*5} { padding: #{$i*5}px!important; } //全体
+    .hp_py_#{$i*5} { padding-block: #{$i*5}px!important; } //上下
+    .hp_px_#{$i*5} { padding-inline: 0 #{$i*5}px!important; } //左右
+    .hp_pt_#{$i*5} { padding-top: #{$i*5}px!important; } //top
+    .hp_pb_#{$i*5} { padding-bottom: #{$i*5}px!important; } //bottom
+    .hp_pl_#{$i*5} { padding-left: #{$i*5}px!important; } //left
+    .hp_pr_#{$i*5} { padding-right: #{$i*5}px!important; } //right
+    // margin
+    .hp_m_#{$i*5} { margin: #{$i*5}px!important; } //全体
+    .hp_my_#{$i*5} { margin: #{$i*5}px 0!important; } //上下
+    .hp_mx_#{$i*5} { margin: 0 #{$i*5}px!important; } //左右
+    .hp_mt_#{$i*5} { margin-top: #{$i*5}px!important; } //top
+    .hp_mb_#{$i*5} { margin-bottom: #{$i*5}px!important; } //bottom
+    .hp_ml_#{$i*5} { margin-left: #{$i*5}px!important; } //left
+    .hp_mr_#{$i*5} { margin-right: #{$i*5}px!important; } //right
+}
+
+// その他
+//-------------------------------------------------------------------
+.hp_of_hidden { overflow: hidden!important; }

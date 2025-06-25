@@ -1,0 +1,19 @@
+{
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview --host",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "aos": "^2.3.4",
+    "astro": "^5.10.0",
+    "the-new-css-reset": "^1.11.3"
+  },
+  "devDependencies": {
+    "sass": "^1.89.2"
+  }
+}

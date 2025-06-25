@@ -1,0 +1,56 @@
+/**************************************************************************
+    ベース (接頭辞なし)
+**************************************************************************/
+@use "sass:math";
+@use "../global" as g;
+
+html {
+    font-size: 10px;
+    overflow-y: scroll; //スクロールバーを常に表示
+}
+
+body {
+    font-family: g.$font_base;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.75;
+    -webkit-text-size-adjust: 100%;
+    color: g.$color_base;
+    overflow: hidden;
+}
+
+a {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none; //クリックした時に選択状態にならないようにする
+    -moz-user-select: none; // Firefox
+    -webkit-user-select: none; // Safari、Chromeなど
+    
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+b {
+    font-weight: bold;
+}
+
+p {
+    text-align: justify;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+// fadeInの要素が初期描画時に一瞬表示されないようにする
+[data-aos] {
+    visibility: hidden;
+
+    &.aos-animate {
+        visibility: visible;
+    }
+}

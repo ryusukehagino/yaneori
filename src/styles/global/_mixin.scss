@@ -1,0 +1,189 @@
+@use "sass:math";
+@use "sass:map";
+@use "config";
+@use "function" as func;
+
+// メディアクエリ
+//-------------------------------------------
+@mixin mq($breakpoint) {
+    @media #{map.get(config.$breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+
+// 矢印「>」
+//-------------------------------------------
+@mixin arrow($direction: 'right', $size: null, $weight: 2px, $color: func.color('base'), $round: false, $skew: false) {
+    // $direction: 上下左右 'top', 'right', 'bottom', 'left' 
+    // $size: 長さ
+    // $weight: 太さ
+    // $color: 色
+    // $round: 端を丸める 使用する場合true (before領域とafter領域を使用します)
+    // $skew: ボーダーの角度を変更 使用する場合degを指定 roundがtrueの場合は使用不可
+
+    width: 1em;  
+    height: 1em;
+    font-size: $size; 
+    
+    // roundなし
+    @if ($round == false) {
+        border-top-style: solid;
+        border-left-style: solid;
+        border-width: $weight;
+        border-color: $color;
+    }
+    
+    // roundあり
+    @else {
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $color;
+            border-radius: math.div($weight, 2);
+        }
+
+        &::before {
+            width: $weight;
+            height: 100%;
+        }
+
+        &::after {
+            width: 100%;
+            height: $weight;
+        }     
+    }
+
+    // 向きと角度の対応付け
+    $to_map: (
+        'top': 45deg,
+        'right': 135deg,
+        'bottom': -135deg,
+        'left': -45deg,
+    );
+
+    @each $to, $deg in $to_map  {
+        @if ($direction == $to) {
+            rotate: $deg;
+
+            // skewあり
+            @if ($skew == true) {
+                skew: ($skew, $skew);
+            }
+        }
+    }
+}
+
+
+// バツアイコン
+//-------------------------------------------
+@mixin close_icon($size: 40px, $weight: 2px, $color: func.color('base')) {
+    // $size: 長さ
+    // $width: 太さ
+    // $height: 色
+
+    display: block;
+    width: $size;
+    height: $size;
+
+    &::before, &::after { 
+        content: ""; 
+        position: absolute;
+        inset: auto;
+        width: $size; 
+        height: $weight; 
+        margin: auto; 
+        background-color: $color; 
+    }
+
+    &::before { 
+        rotate: 45deg; 
+    } 
+    
+    &::after { 
+        rotate: 135deg; 
+    }
+}
+
+
+// 三角形
+//-------------------------------------------
+@mixin triangle($direction: 'right', $width: 30px, $height: 30px, $color: func.color('base')) {
+    // $direction: 三角形の方向 (例えばtopなら上、right-topなら右上という感じで8方向あります)
+    // $width: 横幅
+    // $height: 高さ
+    // $color: 色
+
+    display: block;
+    width: $width;
+    height: $height;
+    background-color: $color;
+
+    @if ($direction == 'top') {
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+    
+    @if ($direction == 'right-top') {
+        clip-path: polygon(100% 0, 100% 100%, 0 0);
+    }
+    
+    @if ($direction == 'right') {
+        clip-path: polygon(100% 50%, 0 100%, 0 0);
+    }
+    
+    @if ($direction == 'right-bottom') {
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+    
+    @if ($direction == 'bottom') {
+        clip-path: polygon(100% 0, 50% 100%, 0 0);
+    }
+    
+    @if ($direction == 'left-bottom') {
+        clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+    
+    @if ($direction == 'left') {
+        clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    }
+    
+    @if ($direction == 'left-top') {
+        clip-path: polygon(0 0, 0 100%, 100% 0);
+    }
+}
+
+// アンカーリンク用余白調整
+//-------------------------------------------
+@mixin anchor_link($margin: 0, $margin_md: null, $margin_lg: null, $margin_xl: null) {
+    // $margin: デフォルトの余白
+    // $margin_md, $margin_lg, $margin_xl: それぞれのメディアクエリの余白（0にしたい場合は「0px」と指定）
+
+    $header_h_sp: map.get(config.$header_h, 'sm');
+    $header_h_pc: map.get(config.$header_h, 'md');
+
+    padding-top: $header_h_sp;
+    margin-top: calc($margin - $header_h_sp);
+    
+    @include mq('md') {
+        @if ($margin_md != null) {
+            margin-top: calc($margin_md - $header_h_pc);
+        }
+        @else {
+            margin-top: calc($margin - $header_h_pc);
+        }
+    }
+
+    @if ($margin_lg != null) {
+        @include mq('lg') {
+            margin-top: calc($margin_lg - $header_h_pc);
+        }
+    }
+
+    @if ($margin_xl != null) {
+        @include mq('xl') {
+            margin-top: calc($margin_xl - $header_h_pc);
+        }
+    }
+}

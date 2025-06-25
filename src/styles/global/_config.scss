@@ -1,0 +1,21 @@
+// ブレイクポイント
+$breakpoints: (
+    'xs': '(max-width: 375px)',
+    'sm': '(max-width: 767px)',
+    'md': '(min-width: 768px)',
+    'lg': '(min-width: 992px)',
+    'lg_max': '(max-width: 991px)',
+    'xl': '(min-width: 1320px)',
+    'xl_max': '(max-width: 1319px)',
+)!default;
+
+// inner-width
+$inner_max: 1000px;
+$inner_min: 92%;
+
+// フォント
+$font_base: "Noto Sans JP", "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
+
+// 色管理
+$color_base: #333;
+$color_key: #C80F20;
