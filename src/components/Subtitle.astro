@@ -1,0 +1,26 @@
+---
+/**
+ * サブタイトル
+ */
+interface Props {
+    Element?: string; //HTMLタグ
+    addClass?: string|string[]; //追加するクラス
+}
+
+const { Element = 'h3', addClass = '' } = Astro.props;
+---
+<Element class:list={['subtitle', addClass]}>
+    <slot />
+</Element>
+
+
+<style lang="scss">
+.subtitle {
+    font-size: min(g.get_vw(20), 2.5rem);
+    font-weight: bold;
+
+    &.is_center {
+        text-align: center;
+    }
+}
+</style>

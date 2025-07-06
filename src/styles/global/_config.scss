@@ -11,11 +11,21 @@ $breakpoints: (
 
 // inner-width
 $inner_max: 1000px;
+$inner_max_small: 800px;
 $inner_min: 92%;
 
 // フォント
 $font_base: "Noto Sans JP", "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
+$font_dot: "DotGothic16", sans-serif;
 
-// 色管理
+// カラー
 $color_base: #333;
-$color_key: #C80F20;
+$color_white: #fff;
+$color_key: #002fa7;
+$color_accent: #C80F20;
+$color_bg: #eefeff;
+
+// svgカラー
+$svg_color_base: invert(14%) sepia(16%) saturate(0%) hue-rotate(303deg) brightness(106%) contrast(86%);
+$svg_color_white: invert(93%) sepia(93%) saturate(0%) hue-rotate(229deg) brightness(107%) contrast(109%);
+$svg_color_key: invert(12%) sepia(53%) saturate(7499%) hue-rotate(226deg) brightness(84%) contrast(103%);

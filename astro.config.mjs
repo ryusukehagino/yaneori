@@ -1,8 +1,17 @@
-// @ts-check
+import { BASE_HOST, BASE_DIR } from './src/consts.js';
 import { defineConfig } from 'astro/config';
+
+// path
+const baseUrl = BASE_HOST + BASE_DIR;
+
+// ビルド時に除外するディレクトリ
+export const EXCLUDES = ['components'];
 
 // https://astro.build/config
 export default defineConfig({
+    site: baseUrl,
+    outDir: './dist' + BASE_DIR,
+    base: BASE_DIR,
     scopedStyleStrategy: 'class',
     build: {
         format: 'preserve'

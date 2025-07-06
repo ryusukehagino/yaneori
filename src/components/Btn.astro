@@ -1,0 +1,79 @@
+---
+/**
+ * ボタン
+ */
+interface Props {
+    href: string; //リンク先
+    addClass?: string|string[]; //追加するクラス
+}
+
+const { href, addClass = '' } = Astro.props;
+
+// hrefにhttpが含まれているかチェック
+const isExternalLink = href.includes('http');
+
+---
+<a href={href} class:list={['btn', addClass]} target={isExternalLink ? '_blank' : undefined} rel={isExternalLink ? 'noopener noreferrer' : undefined}>
+    <slot />
+</a>
+
+
+<style lang="scss">
+.btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    height: min(g.get_vw(40), 50px);
+    font-size: min(g.get_vw(16), 1.6rem);
+    border: 1px solid g.$color_base;
+
+    &::before {
+        @include g.arrow(right, 10px, 2px, g.$color_base);
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 20px;
+        bottom: 0;
+        margin: auto;
+        transition: border-color 0.3s ease;
+    }
+
+    &:hover {
+        color: g.$color_white;
+        background-color: g.$color_key;
+        border-color: g.$color_key;
+
+        &::before {
+            border-color: g.$color_white;
+        }
+    }
+
+    &[target="_blank"] {
+        &::before {
+            content: none;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 10px;
+            bottom: 0;
+            margin: auto;
+            width: 30px;
+            aspect-ratio: 1;
+            background: url('/img/common/icon_tab.svg') no-repeat border-box center/contain;
+            filter: g.$svg_color_base;
+            transition: filter 0.3s ease;
+        }
+
+        &:hover {
+            &::after {
+                filter: g.$svg_color_white;
+            }
+        }
+    }
+}
+</style>

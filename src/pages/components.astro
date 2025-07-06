@@ -1,0 +1,110 @@
+---
+/********************************************************************
+ * 	コンポーネント集
+ **********************************************************************/
+import Layout from '@layouts/Layout.astro';
+import Inner from '@components/Inner.astro';
+import Title from '@components/Title.astro';
+import Subtitle from '@components/Subtitle.astro';
+import Btn from '@components/Btn.astro';
+
+const meta = {
+	title: 'コンポーネント集',
+	description: '',
+}
+---
+
+<Layout title={meta.title} description={meta.description}>
+	<h1 class="comp-page-tit">コンポーネント集</h1>
+
+	<!-- # =================== インナー ================= # -->
+	<h2 class="comp-tit">インナー</h2>
+
+	<Inner>
+		通常
+	</Inner>
+
+	<Inner addClass="is_small">
+		小さい
+	</Inner>
+
+	<Inner addClass="is_pc">
+		PCのみ
+	</Inner>
+
+	<Inner addClass="is_sp">
+		SPのみ
+	</Inner>
+
+	<br><br><br>
+	
+	<!-- # =================== タイトル ================= # -->
+	<h2 class="comp-tit">タイトル</h2>
+	<Inner>
+
+		<Title>タイトル</Title>
+		
+		<br>
+
+		<Title addClass="is_center">中央寄せ</Title>
+
+	</Inner>
+
+	<br><br><br>
+
+	<!-- # =================== サブタイトル ================= # -->
+	<h2 class="comp-tit">サブタイトル</h2>
+	<Inner>
+
+		<Subtitle>サブタイトル</Subtitle>
+		
+		<br>
+
+		<Subtitle addClass="is_center">中央寄せ</Subtitle>
+
+	</Inner>
+
+	<br><br><br>
+
+	<!-- # =================== ボタン ================= # -->
+	<h2 class="comp-tit">ボタン</h2>
+	<Inner>
+		<Btn href="#">ボタン</Btn>
+
+		<br>
+	
+		<Btn href="https://#">別タブ</Btn>
+
+		<br>
+
+	</Inner>
+
+	<br><br><br>
+
+</Layout>
+
+<style lang="scss">
+.comp-page-tit {
+    padding: 25px 0 35px;
+    font-size: 3.8rem;
+    font-weight: bold;
+    text-align: center;
+}
+.comp-tit {
+    width: min(g.$inner_min, g.$inner_max);
+    margin-inline: auto;
+    font-size: 3.2rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #000;
+}
+.comp-tit {
+    width: min(g.$inner_min, g.$inner_max);
+    margin-inline: auto;
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+}
+.comp-bg {
+    padding: 20px 0;
+    background-color: #000;
+}
+</style>
