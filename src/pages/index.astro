@@ -1,6 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Logo from '../components/Logo.astro';
+import {IMG_PATH} from '../consts.js';
+import Layout from '@layouts/Layout.astro';
+import Inner from '@components/Inner.astro';
+import Logo from '@components/Logo.astro';
+import Title from '@components/Title.astro';
 ---
 
 <Layout>
@@ -8,19 +11,58 @@ import Logo from '../components/Logo.astro';
 		<Logo />
 	</div>
 	<!-- /.mv -->
-	<div class="box">
-		<section class="section">
-			
-		</section>
-		<!-- /.section -->
-	</div>
-	<!-- /.box -->
+	<section class="un_section">
+		<Inner>
+			<Title>株式会社屋根折りとは？</Title>
+			<p class="un_section_text">
+				テキストテキストテキストテキストテキストテキストテキストテキスト<br>
+				テキストテキストテキストテキストテキストテキストテキストテキスト<br>
+				テキストテキストテキストテキストテキストテキストテキストテキスト
+			</p>
+			<section class="un_member">
+				<div class="un_member_item">
+					<figure class="un_member_img">
+						<img src={IMG_PATH + "top/profile_tori.webp"} alt="" width="" height="">
+					</figure>
+					<h3 class="un_member_title">鳥</h3>
+					<p class="un_member_text">
+						テキストテキストテキストテキストテキストテキストテキストテキスト<br>
+						テキストテキストテキストテキストテキストテキストテキストテキスト
+					</p>
+				</div>
+				<div class="un_member_item">
+					<figure class="un_member_img">
+						<img src={IMG_PATH + "top/profile_reina.webp"} alt="" width="" height="">
+					</figure>
+					<h3 class="un_member_title">レイナ</h3>
+					<p class="un_member_text">
+						テキストテキストテキストテキストテキストテキストテキストテキスト<br>
+						テキストテキストテキストテキストテキストテキストテキストテキスト
+					</p>
+				</div>
+			</section>
+			<!-- /.member -->
+		</Inner>
+	</section>
+	<!-- /.section -->
+	<section class="un_section">
+		<Inner>
+			<Title>できること</Title>
+			<p class="un_section_text">
+				テキストテキストテキストテキストテキストテキストテキストテキスト<br>
+				テキストテキストテキストテキストテキストテキストテキストテキスト<br>
+				テキストテキストテキストテキストテキストテキストテキストテキスト
+			</p>
+		</Inner>
+	</section>
+	<!-- /.section -->
 </Layout>
 
 <style lang="scss">
 .mv {
 	position: relative;
 	height: 666px;
+	max-height: 100svh;
 	background-image: linear-gradient(to bottom, g.$color_key 66%, g.$color_bg 100%);
 
 	:global(.logo) {
