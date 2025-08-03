@@ -7,6 +7,9 @@ import Inner from '@components/Inner.astro';
 import Title from '@components/Title.astro';
 import Subtitle from '@components/Subtitle.astro';
 import Btn from '@components/Btn.astro';
+import Logo from '@components/Logo.astro';
+import Link from '@components/Link.astro';
+import SliderFlow from '@components/SliderFlow.astro';
 
 const meta = {
 	title: 'コンポーネント集',
@@ -37,12 +40,30 @@ const meta = {
 	</Inner>
 
 	<br><br><br>
+
+	<!-- # =================== ロゴ ================= # -->
+	<h2 class="comp-tit">ロゴ</h2>
+
+	<Inner>
+
+		<Logo />
+
+	</Inner>
+
+	<br><br><br>
 	
 	<!-- # =================== タイトル ================= # -->
 	<h2 class="comp-tit">タイトル</h2>
 	<Inner>
 
 		<Title>タイトル</Title>
+		
+		<br>
+
+		<Title>
+			<Fragment name="default">タイトル</Fragment>
+			<Fragment name="sub">TITLE</Fragment>
+		</Title>
 		
 		<br>
 
@@ -62,6 +83,40 @@ const meta = {
 
 		<Subtitle addClass="is_center">中央寄せ</Subtitle>
 
+		<br>
+
+		<Subtitle addClass="is_right">右寄せ</Subtitle>
+
+		<br>
+
+		<Subtitle addClass="is_md_center">PC中央寄せ</Subtitle>
+
+		<br>
+
+		<Subtitle addClass="is_md_right">PC右寄せ</Subtitle>
+
+		<br>
+		
+		<Subtitle bgColor="#f0f0f0">背景色指定</Subtitle>
+
+		<br>
+
+	</Inner>
+
+	<br><br><br>
+
+	<!-- # =================== テキストリンク ================= # -->
+	<h2 class="comp-tit">テキストリンク</h2>
+	<Inner>
+
+		<Link href="#">テキストリンク</Link>
+
+		<br>
+
+		<Link href="https://#">外部リンク</Link>
+
+		<br>
+
 	</Inner>
 
 	<br><br><br>
@@ -76,6 +131,29 @@ const meta = {
 		<Btn href="https://#">別タブ</Btn>
 
 		<br>
+
+		<Btn href="mailto:">メール</Btn>
+
+		<br>
+
+	</Inner>
+
+	<br><br><br>
+
+	<!-- # =================== 無限スライダー ================= # -->
+	<h2 class="comp-tit">無限スライダー</h2>
+	<Inner>
+
+		<SliderFlow srcList={[
+			"top/bottom_slide_01.webp",
+			"top/bottom_slide_02.webp",
+			"top/bottom_slide_03.webp",
+			"top/bottom_slide_04.webp",
+			"top/bottom_slide_05.webp",
+			"top/bottom_slide_06.webp",
+			"top/bottom_slide_07.webp",
+			"top/bottom_slide_08.webp",
+		]}>
 
 	</Inner>
 

@@ -8,8 +8,16 @@ export const IMG_PATH = BASE_DIR + 'img/';
 
 // メタ関係
 export const SITE_NAME = '株式会社屋根折り';
-export const SITE_DESCRIPTION = '';
+export const SITE_DESCRIPTION = '株式会社屋根折りは、全てのことを無料でやる会社です。何でも依頼してみてください。やりたくないこと以外全部やります！';
 export const SEPARATOR = ' | ';
+
+// メディアクエリ
+export const MQ = {
+    sm: 375,
+    md: 768,
+    lg: 992,
+    xl: 1200,
+};
 
 // グロナビ
 export const NAV_LIST = [

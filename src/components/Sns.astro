@@ -1,0 +1,61 @@
+---
+/**
+ * SNSリスト
+ */
+import {IMG_PATH} from '../consts.js';
+
+interface Props {
+    addClass?: string|string[];
+}
+
+const { addClass = '' } = Astro.props;
+---
+<div class:list={["sns", addClass]}>
+    <a class="sns_item is_x" href="https://x.com/yaneoriman" target="_blank">
+        <img src={IMG_PATH + "common/icon_x.svg"} alt="X" width="21" height="19">
+    </a>
+    <a class="sns_item is_note" href="https://note.com/ryusuke_hagino" target="_blank">
+        <img src={IMG_PATH + "common/icon_note.svg"} alt="note" width="35" height="35">
+    </a>
+    <a class="sns_item is_soundcloud" href="https://soundcloud.com/qc0xviw22xca" target="_blank">
+        <img src={IMG_PATH + "common/icon_soundcloud.svg"} alt="soundcloud" width="31" height="17">
+    </a>
+</div>
+
+
+<style lang="scss">
+.sns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    
+    &_item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 35px;
+        width: 1em;
+        height: 1em;
+        object-fit: contain;
+
+        &.is_x {
+            padding: 7px;
+        }
+
+        &.is_soundcloud {
+            padding: 2px;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &.is_white {
+        img {
+            filter: g.$svg_color_white;
+        }
+    }
+}
+</style>

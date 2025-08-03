@@ -1,11 +1,243 @@
 ---
-
+/**
+ * ヘッダー
+ */
+import Sns from '@components/Sns.astro';
 ---
-<header class="header">
-	
+<header class="header js_header">
+	<p class="header_logo">Y A N E O R I</p>
+    <a class="menu js_menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <!-- /.menu -->
+    <nav class="gnav js_gnav">
+        <div class="gnav_list">
+            <a href="#about" class="gnav_item">株式会社屋根折りとは？</a>
+            <a href="#whatwedo" class="gnav_item">できること</a>
+            <a href="#cases" class="gnav_item">制作事例</a>
+            <a href="#contact" class="gnav_item">お問い合わせ</a>
+        </div>
+		<a class="gnav_close js_close"></a>
+        <Sns />
+    </nav>
+    <!-- /.gnav -->
 </header>
 
 
-<style>
+<style lang="scss">
+.header {
+    position: fixed;
+	top: 0;
+	left: 0;
+	z-index: g.$z_index_header;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	min-width: 100%;
+	height: g.$header_h_sm;
+	background-color: g.$color_white;
+	padding-inline: min(g.get_inner_side(g.$inner_min), 50px);
+	box-shadow: 0 0 5px rgba(g.$color_base, 0.3);
+	
+	@include g.mq('md') {
+        height: g.$header_h_md;
+	}
 
+	@include g.mq('lg') {
+		position: absolute;
+	}
+
+	&_logo {
+		flex-shrink: 0;
+		font-family: g.$font_dots;
+		font-size: min(g.get_vw(22), 2.8rem);
+		font-weight: bold;
+	}
+}
+
+// メニューバー
+.menu {
+	position: relative;
+	display: block;
+	width: 36px;
+	height: 22px;
+
+	@include g.mq('lg') {
+		display: none;
+	}
+
+	span {
+		position: absolute;
+		inset: auto 0;
+		display: block;
+		margin: auto;
+		height: 2px;
+		background-color: g.$color_base;
+		transition: all 0.3s;
+
+		&:nth-of-type(1) {
+			top: 0; 
+		}
+
+		&:nth-of-type(2) {
+			inset: 0;
+		}
+
+		&:nth-of-type(3) {
+			bottom: 0; 
+		}
+	}
+}
+
+.gnav {
+	@include g.mq('lg_max') {
+		position: fixed;
+		inset: 0 auto auto 0;
+		z-index: g.$z_index_gnav;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		min-height: 100svh;
+		padding: calc(g.$header_h_sm + 30px) g.get_inner_side(g.$inner_min) 30px;
+		overflow: scroll;
+		visibility: hidden;
+		transition: 0.3s;
+		background-color: rgba(g.$color_white, 0.9);
+		opacity: 0;
+		visibility: hidden;
+
+		&.is_show {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	&_list {
+		flex-grow: 1;
+
+		@include g.mq('lg') {
+			display: flex;
+			justify-content: end;
+			gap: 30px;
+		}
+	}
+
+	&_item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+		font-weight: 500;
+
+        @include g.mq('lg') {
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+		&:not(:first-of-type) {
+			margin-top: 20px;
+
+			@include g.mq('lg') {
+				margin-top: 0;
+			}
+		}
+
+        &::before {
+            @include g.triangle('right', 12px, 12px, g.$color_base);
+            content: '';
+
+            @include g.mq('lg') {
+                content: none;
+            }
+        }
+
+        &::after {
+            position: absolute;
+            inset: auto auto 0 0;
+            width: 0;
+            height: 1px;
+            background-color: g.$color_key;
+			transition: width 0.3s;
+            
+            @include g.mq('lg') {
+                content: '';
+            }
+        }
+
+        &:hover {
+			opacity: 1;
+			
+            &::after {
+                width: 100%;
+            }
+        }
+	}
+
+    :global(.sns) {
+        @include g.mq('lg') {
+            display: none;
+        }
+    }
+
+	&_close {
+		@include g.close_icon();
+		position: absolute;
+		top: 15px;
+    	right: 22px;
+
+		@include g.mq('lg') {
+			display: none;
+		}
+	}
+}
 </style>
+
+<script>
+import fixBody from '@scripts/fixBody';
+
+/**
+ * グロナビ開閉
+ */
+const el = document.querySelector('.js_header');
+const trigger = el.querySelector('.js_menu');
+const target = el.querySelector('.js_gnav');
+const closeTrigger = el.querySelector('.js_close');
+
+// 開く
+const open = () => {
+    target.classList.add('is_show');
+    fixBody('open');
+}
+
+// 閉じる
+const close = () => {
+    target.classList.remove('is_show');
+    fixBody('close');
+}
+
+// トグル
+const toggle = () => {
+    if (!trigger.classList.contains('is_active')) {
+        open();
+    } else {
+        close();
+    }
+}
+
+trigger.addEventListener('click', toggle);
+closeTrigger.addEventListener('click', close);
+
+// グロナビにページ内リンクがある場合
+const anchorLink = () => {
+    const anchorList = target.querySelectorAll('a[href^="#"]');
+    if (!anchorList || anchorList.length === 0) return;
+
+    // クリックしたらグロナビを閉じる
+    anchorList.forEach(anchor => {
+        anchor.addEventListener('click', () => close());
+    });
+}
+anchorLink();
+</script>

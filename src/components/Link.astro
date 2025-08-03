@@ -1,0 +1,40 @@
+---
+/**
+ * テキストリンク
+ */
+interface Props {
+    href: string;
+    addClass?: string|string[];
+}
+
+const { href, addClass = '' } = Astro.props;
+
+// hrefにhttpが含まれているかチェック
+const isExternalLink = href.includes('http');
+
+---
+<a href={href} class:list={['link', addClass]} target={isExternalLink ? '_blank' : undefined} rel={isExternalLink ? 'noopener noreferrer' : undefined}>
+    <slot />
+</a>
+
+
+<style lang="scss">
+.link {
+    display: inline-block;
+    color: g.$color_link;
+    text-decoration: underline;
+    
+    &[target="_blank"] {
+        display: inline-flex;
+
+        &::after {
+            content: '';
+            width: 1.5em;
+            aspect-ratio: 1;
+            margin: auto;
+            filter: g.$svg_color_link;
+            background: url('/img/common/icon_tab.svg') no-repeat border-box center/contain;
+        }
+    }
+}
+</style>

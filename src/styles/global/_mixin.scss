@@ -79,7 +79,7 @@
 
 // バツアイコン
 //-------------------------------------------
-@mixin close_icon($size: 40px, $weight: 2px, $color: func.color('base')) {
+@mixin close_icon($size: 35px, $weight: 2px, $color: config.$color_base) {
     // $size: 長さ
     // $width: 太さ
     // $height: 色
@@ -91,7 +91,7 @@
     &::before, &::after { 
         content: ""; 
         position: absolute;
-        inset: auto;
+        inset: 0;
         width: $size; 
         height: $weight; 
         margin: auto; 
@@ -154,36 +154,41 @@
     }
 }
 
-// アンカーリンク用余白調整
-//-------------------------------------------
-@mixin anchor_link($margin: 0, $margin_md: null, $margin_lg: null, $margin_xl: null) {
-    // $margin: デフォルトの余白
-    // $margin_md, $margin_lg, $margin_xl: それぞれのメディアクエリの余白（0にしたい場合は「0px」と指定）
+// 点線（linear-gradient）
+//-------------------------------------------------------------------
+@mixin linear_dots($direction: 'x', $color: func.color('base'), $length: 2px, $weight: 1px, $gap: 6px) {
+    // $direction: 方向 (x: 横、y: 縦)
+    // $color: 色
+    // $length: 点線の長さ
+    // $weight: 点線の太さ
+    // $gap: 間隔
+    // $round: 丸くするかどうか
 
-    $header_h_sp: map.get(config.$header_h, 'sm');
-    $header_h_pc: map.get(config.$header_h, 'md');
-
-    padding-top: $header_h_sp;
-    margin-top: calc($margin - $header_h_sp);
+    $to: '';
+    $width: 0;
+    $height: 0;
+    $bg_size: 0;
     
-    @include mq('md') {
-        @if ($margin_md != null) {
-            margin-top: calc($margin_md - $header_h_pc);
-        }
-        @else {
-            margin-top: calc($margin - $header_h_pc);
-        }
+    // 横方向
+    @if ($direction == 'x') {
+        $to: to right;
+        $width: 100%;
+        $height: $weight;
+        $bg_size: ($length + $gap) $height;
+        
+        // 縦方向
+    } @else if ($direction == 'y') {
+        $to: to bottom;
+        $width: $weight;
+        $height: 100%;
+        $bg_size: $height ($length + $gap);
+    
+    // それ以外
+    } @else {
+        @error '$directionは"x"か"y"を指定してください。';
     }
 
-    @if ($margin_lg != null) {
-        @include mq('lg') {
-            margin-top: calc($margin_lg - $header_h_pc);
-        }
-    }
-
-    @if ($margin_xl != null) {
-        @include mq('xl') {
-            margin-top: calc($margin_xl - $header_h_pc);
-        }
-    }
+    width: $width;
+    height: $height;
+    background: linear-gradient($to, $color, $color $gap, transparent $gap, transparent $length + $gap) repeat center/ $bg_size;
 }

@@ -3,8 +3,8 @@
  * サブタイトル
  */
 interface Props {
-    Element?: string; //HTMLタグ
-    addClass?: string|string[]; //追加するクラス
+    Element?: string;
+    addClass?: string|string[];
 }
 
 const { Element = 'h3', addClass = '' } = Astro.props;
@@ -16,11 +16,31 @@ const { Element = 'h3', addClass = '' } = Astro.props;
 
 <style lang="scss">
 .subtitle {
-    font-size: min(g.get_vw(20), 2.5rem);
-    font-weight: bold;
+    position: relative;
+    width: fit-content;
+    margin-inline: auto;
+    font-size: min(g.get_vw(22), 2.8rem);
+    font-weight: 500;
 
-    &.is_center {
-        text-align: center;
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 30px;
+        height: 1px;
+        border: 1px solid g.$color_border;
+    }
+
+    &::before {
+        left: -1em;
+        translate: -100%;
+    }
+    
+    &::after {
+        right: -1em;
+        translate: 100%;
     }
 }
 </style>

@@ -13,9 +13,6 @@ export default defineConfig({
     outDir: './dist' + BASE_DIR,
     base: BASE_DIR,
     scopedStyleStrategy: 'class',
-    build: {
-        format: 'preserve'
-    },
     vite: {
         css: {
             preprocessorOptions: {

@@ -1,0 +1,24 @@
+---
+/**
+ * 白板
+ */
+interface Props {
+    addClass?: string|string[];
+}
+
+const { addClass = '' } = Astro.props;
+
+---
+<article class="contentsBox">
+    <slot/>
+</article>
+<!-- /.contentsBox -->
+
+<style lang="scss">
+.contentsBox {
+    max-width: g.$inner_max;
+    padding: min(g.get_vw(70), 100px) g.get_inner_side(g.$inner_min) 150px;
+    margin-inline: auto;
+    background-color: g.$color_white;
+}
+</style>

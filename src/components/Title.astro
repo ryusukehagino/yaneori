@@ -3,24 +3,43 @@
  * タイトル
  */
 interface Props {
-    Element?: string; //HTMLタグ
-    addClass?: string|string[]; //追加するクラス
+    Element?: string;
+    addClass?: string|string[];
 }
 
 const { Element = 'h2', addClass = '' } = Astro.props;
 ---
 <Element class:list={['title', addClass]}>
-    <slot />
+    <span class="title_main"><slot /></span>
+    <span class="title_sub"><slot name="sub" /></span>
 </Element>
 
 
 <style lang="scss">
 .title {
-    font-family: g.$font_dot;
+    font-family: g.$font_dots;
     font-size: min(g.get_vw(25), 4rem);
-
-    &.is_center {
-        text-align: center;
+    letter-spacing: 0.1em;
+    
+    @include g.mq('md') {
+        display: flex;
+        align-items: baseline;
+        gap: 15px;
     }
+    
+    &.is_center {
+        justify-content: center;
+    }
+
+    &_sub {
+        display: block;
+        font-size: 0.7em;
+        margin-left: 1em;
+        
+        @include g.mq('md') {
+            margin: 5px 0 0;
+        }
+    }
+
 }
 </style>

@@ -1,11 +1,170 @@
 ---
-
+/**
+ * フッター
+ */
+import Inner from '@components/Inner.astro';
+import Logo from '@components/Logo.astro';
+import Sns from '@components/Sns.astro';
 ---
-<footer class="footer">
-	
+<footer class="footer js_footer">
+    <Inner addClass="is_small">
+        <Logo/>
+        <Sns addClass="is_white" />
+        <div class="schedule">
+            <h2 class="schedule_title">● HP更新予定</h2>
+            <p class="schedule_text">
+                いつかやります！　基本的な方針は、回遊して楽しいサイトにすること。
+            </p>
+            <ul class="schedule_list">
+                <li>
+                    「制作事例」ページを作成
+                    <ul>
+                        <li>過去の成果物は全て制作事例として追加していきたい。cmsで投稿可能にする</li>
+                        <li>趣味で作ったアプリとか、まだ表に出してないものが結構ある</li>
+                        <li>活動内容が多岐に渡るためカテゴリで階層化が必要</li>
+                    </ul>
+                </li>
+                <li>
+                    「社長ごあいさつ」ページ作成
+                    <ul>
+                        <li>何故このような活動をするに至ったか、自己紹介もかねて</li>
+                        <li>どこの会社の社長もサイトでごあいさつしている。俺もごあいさつしたい</li>
+                    </ul>
+                </li>
+                <li>
+                    「NEWS」ページ作成
+                    <ul>
+                        <li>更新はnoteで行い、RSSで読み込む</li>
+                    </ul>
+                </li>
+                <li>
+                    ロゴ作成
+                    <ul>
+                        <li>現状単なる16ビットのテキストフォントなので</li>
+                        <li>手描きでなんか書いてsvg化</li>
+                    </ul>
+                </li>
+                <li>
+                    CSSとJSだけで絵を描いて「CSS絵画」というジャンルを作りたい
+                    <ul>
+                        <li>メインビジュアルや制作事例の画像をCSS絵画に置き換え</li>
+                        <li>抽象画っぽい模様を動的に生成できたら面白い</li>
+                        <li>動かしてアニメーションもできる</li>
+                    </ul>
+                </li>
+                <li>
+                    プラスマイナスバロメータ
+                    <ul>
+                        <li>現在の体調をトップページの一番上に表示（双極性障害で毎日決まった進捗が出せないため）</li>
+                        <li>数学者の岡潔にならって「+」「±」「-」の3段階で表現</li>
+                        <li>LINEかなんかですぐ更新できるようにする</li>
+                    </ul>
+                </li>
+                <li>
+                    音楽のプラットフォームを一箇所にまとめる
+                    <ul>
+                        <li>俺の曲専用の音楽プレイヤーを自力で実装してもいい</li>
+                    </ul>
+                </li>
+                <li>
+                    鳥文庫
+                    <ul>
+                        <li>自作の小説やエッセイを発表するページ</li>
+                        <li>青空文庫にならって余計なUIは入れず文字だけに集中できるようにする</li>
+                        <li>ゆくゆくは自分以外の人の作品も載せてweb上の雑誌みたいにしたい</li>
+                    </ul>
+                </li>
+                <li>
+                    夕空文庫
+                    <ul>
+                        <li>現在活動していないアーティストや作家の作品をzipで保存、公開</li>
+                        <li>消えかけの作品を人類の知的財産として保護することが目的</li>
+                        <li>著作権的にどうなのか？</li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    お問い合わせフォーム設置
+                    <ul>
+                        <li>メールアドレスを直接公開するとめっちゃスパム来るらしいので</li>
+                        <li>プライバシーポリシーも必要。定型文ではなく俺自身の文章で書く</li>
+                    </ul>
+                </li>
+                <li>
+                    マシュマロもしくは質問箱設置
+                    <ul>
+                        <li>気軽に誰でもなんか言えるようにしたい</li>
+                    </ul>
+                </li>
+                <li>
+                    いにしえのwebサイトによくある<span style="color: red;">キリ番おめでとうございます！</span>みたいなやつ
+                </li>
+            </ul>
+        </div>
+        <!-- /.schedule -->
+    </Inner>
+    <div class="copyright">
+        <small>Copyright ©yaneori All Rights Reserved.</small>
+    </div>
+    <!-- /.copyright -->
 </footer>
 
+<style lang="scss">
+.footer {
+    padding-top: min(g.get_vw(50), 100px);
+    background-image: g.$color_mv_grad;
+    color: g.$color_white;
 
-<style>
+    :global(.inner) {
+        padding-bottom: min(g.get_vw(100), 200px);
+    }
+
+    :global(.logo) {
+        margin-inline: auto;
+        color: g.$color_white;
+        font-size: min(g.get_vw(30), 4rem);
+        text-align: center;
+    }
+
+    :global(.sns) {
+        margin-top: min(g.get_vw(20), 30px);
+    }
+}
+
+.schedule {
+    margin-top: min(g.get_vw(50), 80px);
+
+    &_title {
+        font-size: min(g.get_vw(18), 20px);
+        font-weight: 500;
+    }
+
+    &_text {
+        margin-top: 10px;
+    }
+
+    &_list {
+        padding-left: 1em;
+        margin-top: 20px;
+
+        ul {
+            padding-left: 1em;
+        }
+
+        li {
+            font-size: 1.4rem;
+            margin-left: 1em;
+            list-style-type: disc;
+        }
+    }
+}
+
+.copyright {
+    padding: 20px 0;
+    background-color: g.$color_white;
+    font-size: 1.2rem;
+    text-align: center;
+    color: g.$color_base;
+}
 
 </style>

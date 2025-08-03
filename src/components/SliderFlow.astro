@@ -1,0 +1,94 @@
+---
+import { IMG_PATH } from '../consts';
+
+/**
+ * 無限スライダー
+ * 画面幅768以下ではフェードイン、以上では無限スライダーになります。
+ */
+interface Props {
+    srcList: string[]; //画像パス
+    addClass?: string|string[]; //追加するクラス
+}
+
+const { srcList, addClass = '' } = Astro.props;
+---
+
+<div class:list={["sliderFlow", "swiper", addClass]}>
+    <div class="swiper-wrapper">
+        {srcList.map((src, i) => (
+            <div class="swiper-slide">
+                <img src={IMG_PATH + src} alt={"slide" + (i+1)} />
+            </div>
+        ))}
+    </div>
+</div>
+
+<style lang="scss">
+.swiper-wrapper {
+	transition-timing-function: linear;
+}
+
+.swiper-slide {
+    @include g.mq('md') {
+        width: 500px;
+    }
+}
+</style>
+
+<script>
+import getMq from '@scripts/getMq';
+import Swiper from 'swiper';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
+
+const el = document.querySelector('.sliderFlow');
+let swiper;
+let currentMq = getMq();
+
+/**
+ * swiperを初期化
+ */
+const initSwiper = () => {
+    const options = {
+        modules: [Autoplay, EffectFade],
+        effect: 'fade',
+        slidesPerView: 1,
+        loop: true,
+        speed: 1500,
+        autoplay: {
+            delay: 3000,
+        },
+        breakpoints: {
+            768: {
+                effect: 'slide',
+                slidesPerView: 'auto',
+                allowTouchMove: false, //スワイプ無効
+                speed: 8000,
+                autoplay: {
+                    delay: 0, // 途切れなくループ
+                },
+            },
+        }
+    };
+
+    // デフォのbreakpoints機能ではeffectが反映されないため追加
+    if (currentMq !== 'xs' && currentMq !== 'sm') {
+        options.effect = 'slide';
+    }
+    swiper = new Swiper(el, options);
+}
+initSwiper(); //初期実行
+
+/**
+ * メディアクエリを跨いだ場合再び初期化
+*/
+window.addEventListener('resize', () => {
+    const mq = getMq();
+    if (currentMq === mq) return;
+    currentMq = mq;
+    swiper.destroy(); //一旦削除
+    initSwiper();
+});
+</script>

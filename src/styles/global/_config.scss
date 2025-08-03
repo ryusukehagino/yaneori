@@ -5,27 +5,40 @@ $breakpoints: (
     'md': '(min-width: 768px)',
     'lg': '(min-width: 992px)',
     'lg_max': '(max-width: 991px)',
-    'xl': '(min-width: 1320px)',
-    'xl_max': '(max-width: 1319px)',
+    'xl': '(min-width: 1200px)',
+    'xl_max': '(max-width: 1119px)',
 )!default;
 
 // inner-width
 $inner_max: 1000px;
 $inner_max_small: 800px;
-$inner_min: 92%;
+$inner_min: 88%;
 
 // フォント
 $font_base: "Noto Sans JP", "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
-$font_dot: "DotGothic16", sans-serif;
+$font_dots: "DotGothic16", sans-serif;
 
 // カラー
 $color_base: #333;
+$color_base_light: #666;
 $color_white: #fff;
 $color_key: #002fa7;
+$color_link: #6B95FF;
 $color_accent: #C80F20;
 $color_bg: #eefeff;
+$color_border: #A0A0A0;
+$color_mv_grad: linear-gradient(to bottom, $color_key 66%, $color_bg 100%);
 
 // svgカラー
 $svg_color_base: invert(14%) sepia(16%) saturate(0%) hue-rotate(303deg) brightness(106%) contrast(86%);
 $svg_color_white: invert(93%) sepia(93%) saturate(0%) hue-rotate(229deg) brightness(107%) contrast(109%);
 $svg_color_key: invert(12%) sepia(53%) saturate(7499%) hue-rotate(226deg) brightness(84%) contrast(103%);
+$svg_color_link: invert(77%) sepia(61%) saturate(5779%) hue-rotate(200deg) brightness(101%) contrast(101%);
+
+// 重ね順
+$z_index_gnav: 1001;
+$z_index_header: 1000;
+
+// ヘッダーの高さ
+$header_h_sm: 60px;
+$header_h_md: 60px;

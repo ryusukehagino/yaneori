@@ -1,23 +1,174 @@
 ---
+import { SITE_NAME, SITE_DESCRIPTION, BASE_HOST, BASE_DIR, IMG_PATH } from '/src/consts';
+import TheHeader from '@layouts/TheHeader.astro';
+import TheFooter from '@layouts/TheFooter.astro';
 import "the-new-css-reset";
-import "@styles/base/_index.scss";
+import "@styles/helper.scss";
+
+interface Props {
+	title?: string;
+	description?: string;
+	keywords?: string;
+	pageId?: string;
+	pageSubId?: string;
+}
+
+const { title = SITE_NAME, description = SITE_DESCRIPTION, keywords = '' } = Astro.props;
+let { pageId = '', pageSubId = '' } = Astro.props;
+
+// メタ関係
+const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+/**
+ * bodyのidとclassを定義
+ */
+(() => {
+	const path = new URL(Astro.request.url).pathname.split('/');
+
+	// id
+	pageId = (() => {
+		if (pageId) return pageId; //propsで渡されたpageIdがあればそれを優先
+		return path[2] ? path[2] : 'top'; //pathの2番目(空ならトップ)
+	})();
+	
+	// class
+	pageSubId = (() => {
+		if (pageSubId) return pageSubId; //propsで渡されたpageSubIdがあればそれを優先
+		return path[3] ? path[3] : ''; //pathの3番目
+	})();
+})();
 ---
 
 <!doctype html>
 <html lang="ja">
 	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-6BQ7ZGDZP7"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-6BQ7ZGDZP7');
+		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>株式会社屋根折り</title>
+		<meta name="description" content={description}>
+		<meta name="keywords" content={keywords}>
+		<meta name="thumbnail" content={BASE_HOST + IMG_PATH + "common/thumbnail.jpg"}>
+		<title>{title}</title>
+		<!-- favicon -->
+		<link rel="icon" href={BASE_DIR + 'favicon.ico'} sizes="any"><!-- 32×32 -->
+		<link rel="icon" href={IMG_PATH + "/meta/favicon.svg"} type="image/svg+xml">
+		<link rel="apple-touch-icon" href={IMG_PATH + "/meta/apple-touch-icon.png"}><!-- 180×180 -->
+		<link rel="manifest" href="/manifest.webmanifest">
+		<!-- end favicon -->
+		<!-- OGP -->
+		<meta property="og:title" content={SITE_NAME}>
+		<meta property="og:description" content={description}>
+		<meta property="og:url" content={pageUrl}>
+		<meta property="og:image" content={IMG_PATH + "meta/ogp.webp"}>
+		<meta property="og:image:alt" content={title}>
+		<meta property="og:type" content="website">
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:site_name" content={SITE_NAME}>
+		<meta name="twitter:card" content="summary_large_image">
+		<!-- end OGP -->
 		<!-- start: Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 		<!-- end: Google Fonts -->
 	</head>
-	<body>
-		<slot />
+	<body id={pageId} class={pageSubId}>
+		<TheHeader/>
+		<main class="main js_main">
+			<slot />
+		</main>
+		<TheFooter/>
 	</body>
 </html>
+
+<style lang="scss" is:global>
+html {
+	font-size: 10px;
+	overflow-y: scroll; /* スクロールバーを常に表示 */
+}
+
+body {
+	font-family: g.$font_base;
+	font-size: 1.6rem;
+	font-weight: 400;
+	letter-spacing: 0.04em;
+	line-height: 1.6;
+	-webkit-text-size-adjust: 100%;
+	color: g.$color_base;
+	background-color: g.$color_bg;
+	overflow: hidden;
+
+	/* グロナビ出現時に固定 */
+	&.is_fixed {
+		overflow: hidden;
+		position: fixed;
+		width: 100%;
+	}
+}
+
+main {
+	padding-top: g.$header_h_sm;
+
+	@include g.mq('lg') {
+		padding-top: g.$header_h_md;
+	}
+}
+
+a {
+	cursor: pointer;
+	transition: 0.2s;
+	user-select: none; /* クリックした時に選択状態にならないようにする */
+	-moz-user-select: none; /* Firefox */
+	-webkit-user-select: none; /* Safari、Chromeなど */
+	
+	&:hover {
+		opacity: 0.7;
+	}
+
+	&[href^="tel:"] {
+		@include g.mq('md') {
+			pointer-events: none;
+			cursor: default;
+			text-decoration: none;
+		}
+	}
+}
+
+b {
+	font-weight: bold;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+[data-aos] {
+	visibility: hidden;
+
+	&.aos-animate {
+		visibility: visible;
+	}
+}
+</style>
+	
+<script>
+import adjustViewport from '@scripts/adjustViewport';
+import smoothScroll from '@scripts/smoothScroll';
+import fixFooterToBottom from "@scripts/fixFooterToBottom";
+import initAOS from '@scripts/initAOS';
+
+adjustViewport();
+smoothScroll();
+fixFooterToBottom();
+initAOS();
+</script>

@@ -1,9 +1,17 @@
 ---
+/**
+ * トップページ
+ */
 import {IMG_PATH} from '../consts.js';
 import Layout from '@layouts/Layout.astro';
-import Inner from '@components/Inner.astro';
+import ContentsBox from '@layouts/ContentsBox.astro';
 import Logo from '@components/Logo.astro';
 import Title from '@components/Title.astro';
+import Subtitle from '@components/Subtitle.astro';
+import Btn from '@components/Btn.astro';
+import TextMerker from '@components/TextMerker.astro';
+import Link from '@components/Link.astro';
+import SliderFlow from '@components/SliderFlow.astro';
 ---
 
 <Layout>
@@ -11,64 +19,412 @@ import Title from '@components/Title.astro';
 		<Logo />
 	</div>
 	<!-- /.mv -->
-	<section class="un_section">
-		<Inner>
-			<Title>株式会社屋根折りとは？</Title>
-			<p class="un_section_text">
-				テキストテキストテキストテキストテキストテキストテキストテキスト<br>
-				テキストテキストテキストテキストテキストテキストテキストテキスト<br>
-				テキストテキストテキストテキストテキストテキストテキストテキスト
+	<ContentsBox>
+		<section id="about" class="section" data-aos="fade">
+			<Title addClass="is_center">
+				<Fragment slot="default">株式会社屋根折りとは？</Fragment>
+				<Fragment slot="sub">/ ABOUT</Fragment>
+			</Title>
+			<p class="section_text">
+				<span>株式会社屋根折りは、</span><span>全てのことを無料でやる会社です。</span><br>
+				<span>会社というか、</span><span>金銭を要求しないので非営利団体です。</span><br>
+				<span>メンバーも2人しかいないので、</span><span>むしろ会社ごっこです。</span><br>
+				<br>
+				<span>できないことはできないですが、</span><span>やったことないことでも、</span><br>
+				<span>面白そうならやってみたいと思っています。</span><br>
+				<span>何でも依頼してみてください。</span>
 			</p>
-			<section class="un_member">
-				<div class="un_member_item">
-					<figure class="un_member_img">
-						<img src={IMG_PATH + "top/profile_tori.webp"} alt="" width="" height="">
-					</figure>
-					<h3 class="un_member_title">鳥</h3>
-					<p class="un_member_text">
-						テキストテキストテキストテキストテキストテキストテキストテキスト<br>
-						テキストテキストテキストテキストテキストテキストテキストテキスト
-					</p>
-				</div>
-				<div class="un_member_item">
-					<figure class="un_member_img">
-						<img src={IMG_PATH + "top/profile_reina.webp"} alt="" width="" height="">
-					</figure>
-					<h3 class="un_member_title">レイナ</h3>
-					<p class="un_member_text">
-						テキストテキストテキストテキストテキストテキストテキストテキスト<br>
-						テキストテキストテキストテキストテキストテキストテキストテキスト
-					</p>
-				</div>
+			<p class="section_catch">
+				<TextMerker>やりたくないこと以外全部やります！</TextMerker>
+			</p>
+			<section class="member" data-aos="fade">
+				<Subtitle>社員紹介</Subtitle>
+				<ul class="member_list">
+					<li class="member_item">
+						<figure class="member_img">
+							<img src={IMG_PATH + "top/profile_tori.webp"} alt="鳥" width="250" height="250">
+						</figure>
+						<div class="member_textArea">
+							<h3 class="member_title">
+								<span class="member_title_main">鳥</span>
+								<span class="member_title_sub"> - 代表取締役社長 / 実行委員長 / 総書記 / 音楽家 / エッセイスト / スーパーハカー / 思想家 / 家事手伝い / 夫</span>
+							</h3>
+							<p class="member_text">
+								基本こいつのワンマンプレイ。突拍子もないことを思いつくのが得意。人と足並みを揃えて生きることができません。時々異常な進捗をぶち上げます。<br>
+							</p>
+						</div>
+					</li>
+					<li class="member_item">
+						<figure class="member_img">
+							<img src={IMG_PATH + "top/profile_reina.webp"} alt="レイナ" width="250" height="250">
+						</figure>
+						<div class="member_textArea">
+							<h3 class="member_title">
+								<span class="member_title_main">レイナ</span>
+								<span class="member_title_sub"> - 終身名誉会長 / 経理部長 / 総務部長 / 応援団長 / 専属スタイリスト / 専属心理カウンセラー / ⊂((・x・))⊃ / 妻</span>
+							</h3>
+							<p class="member_text">
+								鳥の妻。縁の下の力持ち的存在。金を稼ぐことができない鳥の代わりに金を稼いでくれています。この人いなかったらとっくにくたばってます。
+							</p>
+						</div>
+					</li>
+				</ul>
 			</section>
 			<!-- /.member -->
-		</Inner>
-	</section>
-	<!-- /.section -->
-	<section class="un_section">
-		<Inner>
-			<Title>できること</Title>
-			<p class="un_section_text">
-				テキストテキストテキストテキストテキストテキストテキストテキスト<br>
-				テキストテキストテキストテキストテキストテキストテキストテキスト<br>
-				テキストテキストテキストテキストテキストテキストテキストテキスト
+		</section>
+		<!-- /.section -->
+		<section id="whatwedo" class="section" data-aos="fade">
+			<Title addClass="is_center">
+				<Fragment slot="default">できること</Fragment>
+				<Fragment slot="sub">/ WHAT WE DO</Fragment>
+			</Title>
+			<p class="section_text">
+				ホームページ制作、楽曲提供、ライブ出演、文筆、店番、掃除、皿洗い、調べもの代行、退職代行、人生相談、他リクエストあれば何でも。<br>
+				<Link href="#works">制作事例</Link>を参考にしてみてください。<br>
 			</p>
-		</Inner>
+			<section class="fee" data-aos="fade">
+				<Subtitle>料金表</Subtitle>
+				<ul class="fee_list">
+					<li class="fee_item">食糧</li>
+					<li class="fee_item">おこづかい</li>
+					<li class="fee_item">応援のメッセージ</li>
+					<li class="fee_item">SNSでの拡散</li>
+					<li class="fee_item">無料でお仕事を依頼する権利</li>
+					<li class="fee_item">生活に困窮した時に相談する権利</li>
+				</ul>
+				<p class="fee_text">
+					上記は報酬の一例です。<br>
+					作業開始前に見積もり工数、作業後に実際にかかった時間をお伝えします。<br>
+					工数と成果物の満足度に応じて、あなたが報酬を決めてください。<br>
+					（口約束しかしないのでヤリ逃げ可）
+				</p>
+			</section>
+			<!-- /.fee -->
+		</section>
+		<!-- /.section -->
+		<section id="works" class="section" data-aos="fade">
+			<Title addClass="is_center">
+				<Fragment slot="default">制作事例</Fragment>
+				<Fragment slot="sub">/ WORKS</Fragment>
+			</Title>
+			<ul class="works">
+				<li class="works_item" data-aos="fade">
+					<div class="works_title">このサイト</div>
+					<figure class="works_img">
+						<img src={IMG_PATH + "top/works_web.webp"} alt="このサイト" width="365" height="250">
+					</figure>
+					<p class="works_text">
+						デザインからコーディングまで全部自分でやりました。web制作は5年半の実務経験があります。<br>
+						<Link href="https://github.com/ryusukehagino/yaneori">オープンソースで開発してます！</Link>
+					</p>
+				</li>
+				<li class="works_item" data-aos="fade">
+					<div class="works_title">音楽</div>
+					<figure class="works_img">
+						<img src={IMG_PATH + "top/works_music.webp"} alt="音楽" width="365" height="250">
+					</figure>
+					<p class="works_text">
+						14歳の頃から曲作りをしています。<br>
+						<Link href="https://soundcloud.com/qc0xviw22xca/f8b0b462-f30f-481c-ada3-27c10a6e076e">バンドっぽい曲</Link>、<Link href="https://note.com/ryusuke_hagino/m/m765b64b1a983">弾き語りの曲</Link>、<Link href="https://ditto.fm/music-for-odyssey">アンビエント</Link>、<Link href="https://note.com/ryusuke_hagino/m/m2f1028cb117e">ゲーム音楽っぽい曲</Link>、などなど。<br>
+						そのうち一箇所にまとめまーす！
+					</p>
+				</li>
+				<li class="works_item" data-aos="fade">
+					<div class="works_title">文筆</div>
+					<figure class="works_img">
+						<img src={IMG_PATH + "top/works_writing.webp"} alt="文筆" width="365" height="250">
+					</figure>
+					<p class="works_text">
+						<Link href="https://note.com/ryusuke_hagino">noteで日記を書いています。</Link><br>
+						何でも赤裸々に書くスタイルです。日記を読んでもらえば大体素性が知れると思います。<br>
+						今後はエッセイや小説にもチャレンジしていきたい！です！
+					</p>
+				</li>
+			</section>
+			<!-- /.works -->
+		</section>
+		<!-- /.section -->
+		<section id="contact" class="section" data-aos="fade">
+			<Title addClass="is_center">
+				<Fragment slot="default">お問い合わせ</Fragment>
+				<Fragment slot="sub">/ CONTACT</Fragment>
+			</Title>
+			<p class="section_text">お仕事の依頼など、下記からご連絡ください。</p>
+			<div class="section_btn">
+				<Btn href="mailto:tori@yaneori.com">お問い合わせ</Btn>
+			</div>
+		</section>
+		<!-- /.section -->
+	</ContentsBox>
+	<section class="bottom">
+		<h2 class="bottom_title">
+			＿人人人人人人人人人人人＿<br>
+			＞　突然の写真コーナー　＜<br>
+			￣Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^￣
+		</h2>
+		<SliderFlow srcList={[
+			"top/bottom_slide_01.webp",
+			"top/bottom_slide_02.webp",
+			"top/bottom_slide_03.webp",
+			"top/bottom_slide_04.webp",
+			"top/bottom_slide_05.webp",
+			"top/bottom_slide_06.webp",
+			"top/bottom_slide_07.webp",
+			"top/bottom_slide_08.webp",
+		]}>
 	</section>
-	<!-- /.section -->
+	<!-- /.bottom -->
 </Layout>
 
 <style lang="scss">
 .mv {
 	position: relative;
-	height: 666px;
-	max-height: 100svh;
-	background-image: linear-gradient(to bottom, g.$color_key 66%, g.$color_bg 100%);
+	height: min(g.get_vw(350), 666px);
+	max-height: calc(100svh - g.$header_h_sm);
+	background-image: g.$color_mv_grad;
+	
+	@include g.mq('md') {
+		max-height: calc(100svh - g.$header_h_md);
+	}
 
 	:global(.logo) {
 		position: absolute;
 		bottom: 30px;
 		right: 30px;
+	}
+}
+
+:global(.contentsBox) {
+	@include g.mq('lg') {
+		margin-top: 120px;
+	}
+}
+
+.section {
+	position: relative;
+	padding-top: min(g.get_vw(60), 85px);
+
+	&:not(:first-of-type) {
+		margin-top: min(g.get_vw(90), 120px);
+	}
+
+	&::before {
+		@include g.linear_dots('x', g.$color_border);
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	&:first-of-type {
+		@include g.mq('lg') {
+			padding-top: 0;
+			
+			&::before {
+				content: none;
+			}
+		}
+	}
+
+
+	&_text {
+		max-width: g.$inner_max_small;
+		margin: 30px auto 0;
+		font-size: min(g.get_vw(16), 1.8rem);
+		font-weight: 500;
+		
+		@include g.mq('md') {
+			text-align: center;
+		}
+
+		span {
+			display: inline-block;
+		}
+	}
+
+	&_catch {
+		margin-top: min(g.get_vw(20), 30px);
+		font-size: min(g.get_vw(18), 2rem);
+		font-weight: bold;
+		text-align: center;
+	}
+	
+	&_btn {
+		margin-top: min(g.get_vw(20), 30px);
+
+		:global(.btn) {
+			margin-inline: auto;
+		}
+	}
+}
+
+.member {
+	margin-top: 75px;
+
+	&_list {
+		margin-top: min(g.get_vw(30), 50px);
+	}
+	
+	&_item {
+		display: grid;
+		grid-template-columns: 1fr;
+		align-items: center;
+		gap: min(g.get_vw(20), 50px);
+		margin-top: 50px;
+		
+		@include g.mq('md') {
+			grid-template-columns: 250px 1fr;
+		}
+		
+		&:not(:first-of-type) {
+			margin-top: 50px;
+		}
+	}
+
+	&_img {
+		overflow: hidden;
+		border-radius: 100vmax;
+		background-color: #000;
+		max-width: 250px;
+		margin-inline: auto;
+	}
+
+	&_title {
+		display: flex;
+		align-items: top;
+		gap: 20px;
+		font-weight: 500;
+		font-size: min(g.get_vw(20), 2.5rem);
+
+		&_main {
+			flex-shrink: 0;
+		}
+
+		&_sub {
+			display: block;
+			margin-top: min(g.get_vw(5), 10px);
+			font-size: max(0.55em, 1.4rem);
+			font-weight: 500;
+			color: g.$color_border;
+		}
+	}
+
+	&_text {
+		margin-top: 10px;
+	}
+}
+
+.fee {
+	margin-top: min(g.get_vw(50), 75px);
+	
+	&_list {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		margin-top: min(g.get_vw(20), 30px);
+		border: 1px solid g.$color_border;
+	}
+	
+	&_item {
+		padding: 1em;
+		font-size: min(g.get_vw(14), 1.6rem);
+		
+		&:nth-of-type(odd) {
+			border-right: 1px solid g.$color_border;
+		}
+		
+		&:not(:nth-child(-n+2)) {
+			border-top: 1px solid g.$color_border;
+		}
+	}
+
+	&_text {
+		margin-top: min(g.get_vw(10), 20px);
+		font-size: min(g.get_vw(14), 1.6rem);
+	}
+}
+
+.works {
+	margin-top: 50px;
+	
+	&_item {
+		@include g.mq('md') {
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-template-rows: auto 1fr;
+			gap: 20px 40px;
+		}
+		
+		&:not(:first-of-type) {
+			margin-top: 50px;
+		}
+		
+		&:nth-of-type(odd) {
+			@include g.mq('md') {
+				grid-template-columns: 1fr min(42%, 365px);
+				grid-template-areas:
+				"title img"
+				"text img";
+			}
+		}
+		
+		&:nth-of-type(even) {
+			@include g.mq('md') {
+				grid-template-columns: min(42%, 365px) 1fr;
+				grid-template-areas:
+					"img title"
+					"img text";
+			}
+		}
+	}
+	
+	&_title {
+		font-size: min(g.get_vw(20), 2.8rem);
+		font-weight: 500;
+		
+		@include g.mq('md') {
+			grid-area: title;
+		}
+	}
+
+	&_img {
+		max-width: 365px;
+		aspect-ratio: 365 / 250;
+		margin: 10px auto 0;
+		
+		@include g.mq('md') {
+			grid-area: img;
+			margin: 0;
+		}
+		
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&_text {
+		margin-top: 20px;
+		text-align: left;
+		
+		@include g.mq('md') {
+			grid-area: text;
+			margin-top: 0;
+		}
+	}
+}
+
+.bottom {
+	margin-top: min(g.get_vw(50), 100px);
+
+	&_title {
+		font-size: min(g.get_vw(16), 1.8rem);
+		font-weight: normal;
+		text-align: center;
+	}
+
+	:global(.sliderFlow) {
+		margin-top: 20px;
 	}
 }
 </style>
