@@ -55,19 +55,19 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description}>
 		<meta name="keywords" content={keywords}>
-		<meta name="thumbnail" content={BASE_HOST + IMG_PATH + "common/thumbnail.jpg"}>
+		<meta name="thumbnail" content={BASE_HOST + IMG_PATH + "meta/ogp.webp"}>
 		<title>{title}</title>
 		<!-- favicon -->
-		<link rel="icon" href={BASE_DIR + 'favicon.ico'} sizes="any"><!-- 32×32 -->
-		<link rel="icon" href={IMG_PATH + "/meta/favicon.svg"} type="image/svg+xml">
-		<link rel="apple-touch-icon" href={IMG_PATH + "/meta/apple-touch-icon.png"}><!-- 180×180 -->
+		<link rel="icon" href={BASE_HOST + BASE_DIR + 'favicon.ico'} sizes="any"><!-- 32×32 -->
+		<link rel="icon" href={BASE_HOST + IMG_PATH + "meta/favicon.svg"} type="image/svg+xml">
+		<link rel="apple-touch-icon" href={BASE_HOST + IMG_PATH + "meta/apple-touch-icon.png"}><!-- 180×180 -->
 		<link rel="manifest" href="/manifest.webmanifest">
 		<!-- end favicon -->
 		<!-- OGP -->
 		<meta property="og:title" content={SITE_NAME}>
 		<meta property="og:description" content={description}>
 		<meta property="og:url" content={pageUrl}>
-		<meta property="og:image" content={IMG_PATH + "meta/ogp.webp"}>
+		<meta property="og:image" content={BASE_HOST + IMG_PATH + "meta/ogp.webp"}>
 		<meta property="og:image:alt" content={title}>
 		<meta property="og:type" content="website">
 		<meta property="og:locale" content="ja_JP" />
