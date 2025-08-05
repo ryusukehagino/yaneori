@@ -20,6 +20,9 @@ const { addClass = '' } = Astro.props;
     <a class="sns_item is_soundcloud" href="https://soundcloud.com/qc0xviw22xca" target="_blank">
         <img src={IMG_PATH + "common/icon_soundcloud.svg"} alt="soundcloud" width="31" height="17">
     </a>
+    <a class="sns_item is_youtube" href="https://www.youtube.com/@toribirdtoribirdtori" target="_blank">
+        <img src={IMG_PATH + "common/icon_youtube.svg"} alt="soundcloud" width="31" height="31">
+    </a>
 </div>
 
 
@@ -44,6 +47,10 @@ const { addClass = '' } = Astro.props;
         }
 
         &.is_soundcloud {
+            padding: 2px;
+        }
+
+        &.is_youtube {
             padding: 2px;
         }
 
