@@ -25,18 +25,27 @@ import SliderFlow from '@components/SliderFlow.astro';
 				<Fragment slot="default">株式会社屋根折りとは？</Fragment>
 				<Fragment slot="sub">/ ABOUT</Fragment>
 			</Title>
-			<p class="section_text">
-				<span>株式会社屋根折りは、</span><span>全てのことを無料でやる会社です。</span><br>
-				<span>会社というか、</span><span>金銭を要求しないので非営利団体です。</span><br>
-				<span>メンバーも2人しかいないので、</span><span>むしろ会社ごっこです。</span><br>
-				<br>
-				<span>できないことはできないですが、</span><span>やったことないことでも、</span><br>
-				<span>面白そうならやってみたいと思っています。</span><br>
-				<span>何でも依頼してみてください。</span>
-			</p>
-			<p class="section_catch">
-				<TextMerker>やりたくないこと以外全部やります！</TextMerker>
-			</p>
+			<div class="section_contents">
+				<div class="section_row">
+					<p class="section_text">
+						<span>株式会社屋根折りは、</span><span>全てのことを無料でやる会社です。</span><br>
+						<span>会社というか、</span><span>金銭を要求しないので非営利団体です。</span><br>
+						<span>メンバーも2人しかいないので、</span><span>むしろ会社ごっこです。</span><br>
+						<br>
+						<span>できないことはできないですが、</span><span>やったことないことでも、</span><br>
+						<span>面白そうならやってみたいと思っています。</span><br>
+						<span>何でも依頼してみてください。</span>
+					</p>
+					<p class="section_catch">
+						<TextMerker>やりたくないこと以外全部やります！</TextMerker>
+					</p>
+				</div>
+				<div class="section_row">
+					<div class="section_btn">
+						<Btn href="https://note.com/ryusuke_hagino/n/ncd84fd90f7a0">5000字くらいあるやつ</Btn>
+					</div>
+				</div>
+			</div>
 			<section class="member" data-aos="fade">
 				<Subtitle>社員紹介</Subtitle>
 				<ul class="member_list">
@@ -78,28 +87,30 @@ import SliderFlow from '@components/SliderFlow.astro';
 				<Fragment slot="default">できること</Fragment>
 				<Fragment slot="sub">/ WHAT WE DO</Fragment>
 			</Title>
-			<p class="section_text">
-				ホームページ制作、楽曲提供、ライブ出演、文筆、店番、掃除、皿洗い、調べもの代行、退職代行、人生相談、他リクエストあれば何でも。<br>
-				<Link href="#works">制作事例</Link>を参考にしてみてください。<br>
-			</p>
-			<section class="fee" data-aos="fade">
-				<Subtitle>料金表</Subtitle>
-				<ul class="fee_list">
-					<li class="fee_item">食糧</li>
-					<li class="fee_item">おこづかい</li>
-					<li class="fee_item">応援のメッセージ</li>
-					<li class="fee_item">SNSでの拡散</li>
-					<li class="fee_item">無料でお仕事を依頼する権利</li>
-					<li class="fee_item">生活に困窮した時に相談する権利</li>
-				</ul>
-				<p class="fee_text">
-					上記は報酬の一例です。<br>
-					作業開始前に見積もり工数、作業後に実際にかかった時間をお伝えします。<br>
-					工数と成果物の満足度に応じて、あなたが報酬を決めてください。<br>
-					（口約束しかしないのでヤリ逃げ可）
+			<div class="section_contents">
+				<p class="section_text">
+					ホームページ制作、楽曲提供、ライブ出演、文筆、店番、掃除、皿洗い、調べもの代行、退職代行、人生相談、他リクエストあれば何でも。<br>
+					<Link href="#works">制作事例</Link>を参考にしてみてください。<br>
 				</p>
-			</section>
-			<!-- /.fee -->
+				<section class="fee" data-aos="fade">
+					<Subtitle>料金表</Subtitle>
+					<ul class="fee_list">
+						<li class="fee_item">食糧</li>
+						<li class="fee_item">おこづかい</li>
+						<li class="fee_item">応援のメッセージ</li>
+						<li class="fee_item">SNSでの拡散</li>
+						<li class="fee_item">無料でお仕事を依頼する権利</li>
+						<li class="fee_item">生活に困窮した時に相談する権利</li>
+					</ul>
+					<p class="fee_text">
+						上記は報酬の一例です。<br>
+						作業開始前に見積もり工数、作業後に実際にかかった時間をお伝えします。<br>
+						工数と成果物の満足度に応じて、あなたが報酬を決めてください。<br>
+						（口約束しかしないのでヤリ逃げ可）
+					</p>
+				</section>
+				<!-- /.fee -->
+			</div>
 		</section>
 		<!-- /.section -->
 		<section id="works" class="section" data-aos="fade">
@@ -149,16 +160,20 @@ import SliderFlow from '@components/SliderFlow.astro';
 				<Fragment slot="default">お問い合わせ</Fragment>
 				<Fragment slot="sub">/ CONTACT</Fragment>
 			</Title>
-			<div class="section_row">
-				<p class="section_text">お仕事の依頼など、下記からご連絡ください。</p>
-				<div class="section_btn">
-					<Btn href="mailto:tori@yaneori.com">お問い合わせ</Btn>
+			<div class="section_contents">
+				<div class="section_row">
+					<p class="section_text">お仕事の依頼など、下記からご連絡ください。</p>
+					<div class="section_btn">
+						<Btn href="mailto:tori@yaneori.com">お問い合わせ</Btn>
+					</div>
+				</div>
+				<div class="section_row">
+					<p class="section_note">
+						匿名で何か言いたい方は<Link href="https://marshmallow-qa.com/mfi93t5cc5tvc5e?t=woMMBm&utm_medium=url_text&utm_source=promotion">こちらから</Link>どうぞ。<br>
+						noteで返信します。
+					</p>
 				</div>
 			</div>
-			<p class="section_note">
-				匿名で何か言いたい方は<Link href="https://marshmallow-qa.com/mfi93t5cc5tvc5e?t=woMMBm&utm_medium=url_text&utm_source=promotion">こちらから</Link>どうぞ。<br>
-				noteで返信します。
-			</p>
 		</section>
 		<!-- /.section -->
 	</ContentsBox>
@@ -232,18 +247,24 @@ import SliderFlow from '@components/SliderFlow.astro';
 		}
 	}
 
+	&_contents {
+		margin-top: 30px;
+	}
+
+	&_row {
+		&:not(:first-of-type) {
+			margin-top: 50px;
+		}
+	}
+	
 	&_text {
 		max-width: g.$inner_max_small;
-		margin: 30px auto 0;
+		margin-inline: auto;
 		font-size: min(g.get_vw(16), 1.8rem);
 		font-weight: 500;
 		
 		@include g.mq('md') {
 			text-align: center;
-		}
-
-		&.is_mt_l {
-			margin-top: 50px;
 		}
 
 		span {
@@ -267,8 +288,6 @@ import SliderFlow from '@components/SliderFlow.astro';
 	}
 
 	&_note {
-		margin-top: 50px;
-
 		@include g.mq('md') {
 			text-align: center;
 		}
