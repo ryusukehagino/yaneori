@@ -2,12 +2,55 @@
 /**
  * ヘッダー
  */
-import {IMG_PATH} from '../consts.js';
+import {BASE_DIR} from '../consts.js';
 import Logo from '@components/Logo.astro';
 import Sns from '@components/Sns.astro';
+
+interface Props {
+    pageid: string;
+}
+
+const { pageid } = Astro.props;
+
+// ページ内リンク：トップページ以外の場合はBASE_DIRを追加
+let anchor_preffix = '';
+if (pageid !== 'top') {
+	anchor_preffix = BASE_DIR;
+	console.log(anchor_preffix);
+}
+
+// グロナビリスト
+const nav_list = [
+    {
+        id: 'about',
+        name: '株式会社屋根折りとは？',
+        link: anchor_preffix + "#about",
+    },
+    {
+        id: 'whatwedo',
+        name: 'できること',
+        link: anchor_preffix + "#whatwedo",
+    },
+    {
+        id: 'works',
+        name: '制作事例',
+        link: anchor_preffix + "#works",
+    },
+    {
+        id: 'contact',
+        name: 'お問い合わせ',
+        link: anchor_preffix + "#contact",
+    },
+    {
+        id: 'fund',
+        name: '基金',
+        link: BASE_DIR + 'fund/',
+    },
+];
+
 ---
 <header class="header js_header">
-	<Logo en={true} />
+	<Logo en={true} link={true} />
     <a class="menu js_menu">
         <span></span>
         <span></span>
@@ -16,10 +59,9 @@ import Sns from '@components/Sns.astro';
     <!-- /.menu -->
     <nav class="gnav js_gnav">
         <div class="gnav_list">
-            <a href="#about" class="gnav_item">株式会社屋根折りとは？</a>
-            <a href="#whatwedo" class="gnav_item">できること</a>
-            <a href="#cases" class="gnav_item">制作事例</a>
-            <a href="#contact" class="gnav_item">お問い合わせ</a>
+			{nav_list.map((val) => (
+				<a href={val.link} class:list={['gnav_item', val.id === pageid ? ' is_current' : '']}>{val.name}</a>
+			))}
         </div>
 		<a class="gnav_close js_close"></a>
         <Sns />
@@ -46,10 +88,6 @@ import Sns from '@components/Sns.astro';
 	
 	@include g.mq('md') {
         height: g.$header_h_md;
-	}
-
-	@include g.mq('lg') {
-		position: absolute;
 	}
 
 	:global(.logo) {
@@ -173,6 +211,16 @@ import Sns from '@components/Sns.astro';
                 width: 100%;
             }
         }
+
+		&.is_current {
+			@include g.mq('lg') {
+				pointer-events: none;
+				
+				&::after {
+					width: 100%;
+				}
+			}
+		}
 	}
 
     :global(.sns) {
@@ -185,7 +233,7 @@ import Sns from '@components/Sns.astro';
 		@include g.close_icon();
 		position: absolute;
 		top: 15px;
-    	right: 22px;
+		right: 22px;
 
 		@include g.mq('lg') {
 			display: none;

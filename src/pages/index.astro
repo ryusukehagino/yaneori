@@ -225,6 +225,11 @@ import SliderFlow from '@components/SliderFlow.astro';
 .section {
 	position: relative;
 	padding-top: min(g.get_vw(60), 85px);
+	scroll-margin-top: g.$header_h_sm;
+	
+	@include g.mq('md') {
+		scroll-margin-top: g.$header_h_md;
+	}
 
 	&:not(:first-of-type) {
 		margin-top: min(g.get_vw(90), 120px);

@@ -18,21 +18,3 @@ export const MQ = {
     lg: 992,
     xl: 1200,
 };
-
-// グロナビ
-export const NAV_LIST = [
-    // {
-    //     id: 'top',
-    //     nameEn: 'TOP',
-    //     nameJa: 'トップ',
-    //     link: BASE_DIR,
-    //     blank: false,
-    // },
-    // {
-    //     id: 'concept',
-    //     nameEn: 'CONCEPT',
-    //     nameJa: 'コンセプト',
-    //     link: BASE_DIR + 'concept/',
-    //     blank: false,
-    // },
-];

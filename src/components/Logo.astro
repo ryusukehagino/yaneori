@@ -6,23 +6,26 @@ import {IMG_PATH} from '../consts.js';
 
 interface Props {
     en?: boolean;
+    link?: boolean; //トップページにリンクするかどうか
     addClass?: boolean;
 }
 
-const { en = false, addClass = '' } = Astro.props;
+const { en = false, link = false, addClass = '' } = Astro.props;
 
 // 画像パス生成
-let src = IMG_PATH + 'common/logo';
-if (en) {
-    src += '_en.svg';
-} else {
-    src += '.svg';
-}
+const src = en ? IMG_PATH + 'common/logo_en.svg' : IMG_PATH + 'common/logo.svg';
+const alt = en ? '株式会社屋根折り' : 'YANEORI';
 ---
-<p class:list={['logo', addClass]}>
-    <img src={src} alt={en ? '株式会社屋根折り' : 'YANEORI'}>
-</p>
 
+{link ? (
+    <a class:list={['logo', addClass]} href="/">
+        <img src={src} alt={alt}/>
+    </a>
+) : (
+    <p class:list={['logo', addClass]}>
+        <img src={src} alt={alt}/>
+    </p>
+)}
 
 <style lang="scss">
 .logo {

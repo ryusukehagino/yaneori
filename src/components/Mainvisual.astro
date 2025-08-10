@@ -1,0 +1,78 @@
+---
+/**
+ * メインビジュアル
+ */
+
+interface Props {
+    addClass?: string|string[];
+}
+
+const { addClass = '' } = Astro.props;
+---
+
+<div class:list={["mainvisual", addClass]}>
+    <div class="mainvisual_textArea">
+        <h1 class="mainvisual_title">
+            <span class="mainvisual_title_main"><slot/></span>
+            <span class="mainvisual_title_sub"><slot name="sub"/></span>
+        </h1>
+        <p><slot name="text" /></p>
+    </div>
+</div>
+
+
+<style lang="scss">
+.mainvisual {
+    position: relative;
+    height: 350px;
+
+    // チェック柄
+    $color_1: rgba(g.$color_key, 0.1);
+    $color_2: rgba(g.$color_key, 0.2);
+    $size: 35px;
+    background-image :
+    repeating-linear-gradient(
+        to bottom,
+        $color_1, $color_1 $size,
+        rgba(g.$color_white, 0.2) 0, rgba(g.$color_white, 0.2) $size * 2),
+    repeating-linear-gradient(
+        to right,
+        $color_2, $color_2 $size,
+        rgba(g.$color_white, 0.2) 0, rgba(g.$color_white, 0.2) $size * 2);
+    background-color : g.$color_bg;
+
+    &_textArea {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        translate: -50% -50%;
+    }
+
+    &_title {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 15px;
+        font-family: g.$font_dots;
+        font-size: 4rem;
+        letter-spacing: 0.1em;
+        line-height: 1;
+
+        &_sub {
+            font-size: 0.7em;
+            
+            @include g.mq('md') {
+                margin: 5px 0 0;
+            }
+        }
+    }
+    
+    &_text {
+        margin-top: min(g.get_vw(10), 20px);
+        font-size: min(g.get_vw(16), 1.8rem);
+        font-weight: 500;
+        text-align: center;
+        color: g.$color_white;
+    }
+}
+</style>

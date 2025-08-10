@@ -28,13 +28,13 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 	// id
 	pageId = (() => {
 		if (pageId) return pageId; //propsで渡されたpageIdがあればそれを優先
-		return path[2] ? path[2] : 'top'; //pathの2番目(空ならトップ)
+		return path[1] ? path[1] : 'top'; //pathの2番目(空ならトップ)
 	})();
 	
 	// class
 	pageSubId = (() => {
 		if (pageSubId) return pageSubId; //propsで渡されたpageSubIdがあればそれを優先
-		return path[3] ? path[3] : ''; //pathの3番目
+		return path[2] ? path[2] : ''; //pathの3番目
 	})();
 })();
 ---
@@ -81,7 +81,7 @@ const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 		<!-- end: Google Fonts -->
 	</head>
 	<body id={pageId} class={pageSubId}>
-		<TheHeader/>
+		<TheHeader pageid={pageId}/>
 		<main class="main js_main">
 			<slot />
 		</main>
