@@ -2,10 +2,12 @@
 /**
  * ヘッダー
  */
+import {IMG_PATH} from '../consts.js';
+import Logo from '@components/Logo.astro';
 import Sns from '@components/Sns.astro';
 ---
 <header class="header js_header">
-	<p class="header_logo">Y A N E O R I</p>
+	<Logo en={true} />
     <a class="menu js_menu">
         <span></span>
         <span></span>
@@ -50,11 +52,9 @@ import Sns from '@components/Sns.astro';
 		position: absolute;
 	}
 
-	&_logo {
+	:global(.logo) {
 		flex-shrink: 0;
-		font-family: g.$font_dots;
-		font-size: min(g.get_vw(22), 2.8rem);
-		font-weight: bold;
+		width: min(g.get_vw(180), 250px);
 	}
 }
 

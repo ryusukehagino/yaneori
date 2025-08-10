@@ -2,15 +2,39 @@
 /**
  * ロゴ
  */
+import {IMG_PATH} from '../consts.js';
+
+interface Props {
+    en?: boolean;
+    addClass?: boolean;
+}
+
+const { en = false, addClass = '' } = Astro.props;
+
+// 画像パス生成
+let src = IMG_PATH + 'common/logo';
+if (en) {
+    src += '_en.svg';
+} else {
+    src += '.svg';
+}
 ---
-<div class="logo">
-    株式会社屋根折り
-</div>
+<p class:list={['logo', addClass]}>
+    <img src={src} alt={en ? '株式会社屋根折り' : 'YANEORI'}>
+</p>
 
 
 <style lang="scss">
 .logo {
-    font-family: g.$font_dots;
-    font-size: min(g.get_vw(40), 7rem);
+    img {
+        width: 100%;
+        filter: g.$svg_color_base;
+    }
+    
+    &.is_white {
+        img {
+            filter: g.$svg_color_white;
+        }
+    }
 }
 </style>

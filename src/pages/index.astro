@@ -204,7 +204,15 @@ import SliderFlow from '@components/SliderFlow.astro';
 	:global(.logo) {
 		position: absolute;
 		bottom: 30px;
-		right: 30px;
+		right: 0;
+		padding-inline: 10px;
+		width: 600px;
+		max-width: 100%;
+		
+		@include g.mq('md') {
+			right: 30px;
+			padding-inline: 0;
+		}
 	}
 }
 

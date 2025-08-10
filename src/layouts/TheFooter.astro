@@ -8,7 +8,7 @@ import Sns from '@components/Sns.astro';
 ---
 <footer class="footer js_footer">
     <Inner addClass="is_small">
-        <Logo/>
+        <Logo addClass="is_white"/>
         <Sns addClass="is_white" />
         <div class="schedule">
             <h2 class="schedule_title">● HP更新予定</h2>
@@ -120,10 +120,9 @@ import Sns from '@components/Sns.astro';
     }
 
     :global(.logo) {
+        width: 520px;
+        max-width: 100%;
         margin-inline: auto;
-        color: g.$color_white;
-        font-size: min(g.get_vw(30), 4rem);
-        text-align: center;
     }
 
     :global(.sns) {
