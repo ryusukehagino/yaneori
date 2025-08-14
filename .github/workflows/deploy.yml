@@ -5,6 +5,14 @@ on:
     branches:
       - main
       - develop
+  repository_dispatch:
+    branches:
+      #- main
+      - develop
+  workflow_dispatch:
+    branches:
+      #- main
+      - develop
 
 jobs:
   build:
@@ -21,6 +29,7 @@ jobs:
         with:
           node-version: 22
           cache: 'npm'
+          
 
       # 3. FTP差分アップロード用 state ファイルのキャッシュ復元
       - uses: actions/cache@v4

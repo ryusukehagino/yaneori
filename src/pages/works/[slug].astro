@@ -1,0 +1,57 @@
+---
+/**
+ * 制作事例詳細ページ
+ */
+import {IMG_PATH} from '../../consts.js';
+import Layout from '@layouts/Layout.astro';
+import Mainvisual from '@components/Mainvisual.astro';
+import ContentsBox from '@layouts/ContentsBox.astro';
+import Btn from '@components/Btn.astro';
+import {fetchBlogs, fetchBlogDetail} from "@scripts/microcms";
+
+// 詳細記事ページの全パスを取得
+export async function getStaticPaths() {
+	const response = await fetchBlogs('works', { fields: ['id'] });
+	return response.contents.map((content: any) => ({
+		params: {
+			slug: content.id
+		},
+	}));
+}
+
+//記事の詳細情報を取得
+const slug = Astro.params.slug;
+const response = await fetchBlogDetail('works', slug as string);
+---
+
+<Layout>
+	<Mainvisual>
+		<Fragment slot="default">制作事例</Fragment>
+		<Fragment slot="sub">/ works</Fragment>
+	</Mainvisual>
+	<ContentsBox>
+		id: {response.id} <br>
+		title: {response.title} <br>
+		content: {response.content}
+	</ContentsBox>
+</Layout>
+
+<style lang="scss">
+:global(.contentsBox) {
+	@include g.mq('lg') {
+		margin-top: 80px;
+	}
+}
+
+ul li {
+	&:not(:first-of-type) {
+		margin-top: 30px;
+	}
+}
+
+:global(.footer) {
+	@include g.mq('lg') {
+		margin-top: min(g.get_vw(100), 200px);
+	}
+}
+</style>

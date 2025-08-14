@@ -1,0 +1,49 @@
+---
+/**
+ * 制作事例一覧ページ
+ */
+import {IMG_PATH} from '../../consts.js';
+import Layout from '@layouts/Layout.astro';
+import Mainvisual from '@components/Mainvisual.astro';
+import ContentsBox from '@layouts/ContentsBox.astro';
+import Btn from '@components/Btn.astro';
+import {fetchBlogs} from "@scripts/microcms";
+
+const response = await fetchBlogs('works');
+---
+
+<Layout>
+	<Mainvisual>
+		<Fragment slot="default">制作事例</Fragment>
+		<Fragment slot="sub">/ works</Fragment>
+	</Mainvisual>
+	<ContentsBox>
+		<ul>
+			{response.contents.map((val: any) => (
+				<li>
+					<a href={"/works/" + val.id}>{val.title}</a>
+				</li>
+			))}
+		</ul>
+	</ContentsBox>
+</Layout>
+
+<style lang="scss">
+:global(.contentsBox) {
+	@include g.mq('lg') {
+		margin-top: 80px;
+	}
+}
+
+ul li {
+	&:not(:first-of-type) {
+		margin-top: 30px;
+	}
+}
+
+:global(.footer) {
+	@include g.mq('lg') {
+		margin-top: min(g.get_vw(100), 200px);
+	}
+}
+</style>
