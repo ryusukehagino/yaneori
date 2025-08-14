@@ -6,6 +6,7 @@ on:
       - main
       - develop
   repository_dispatch:
+    types: [update]
     branches:
       - main
       - develop
