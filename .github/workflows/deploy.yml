@@ -43,7 +43,7 @@ jobs:
       - run: npm ci
 
       # 5. ビルド
-      - run: npm run build
+      - run: npm run build --verbose
 
       # 成果物をワークスペースに保持
       - name: Upload build artifacts
