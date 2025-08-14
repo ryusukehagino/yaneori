@@ -1,0 +1,86 @@
+name: 自動デプロイ設定
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      build-dir: dist
+
+    steps:
+      # 1. ソース取得
+      - uses: actions/checkout@v4
+
+      # 2. Node.js セットアップ & npmキャッシュ
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      # 3. FTP差分アップロード用 state ファイルのキャッシュ復元
+      - uses: actions/cache@v4
+        with:
+          path: .ftp-deploy-sync-state.json
+          key: ftp-state-${{ github.ref_name }}
+          restore-keys: |
+            ftp-state-
+
+      # 4. 依存関係インストール
+      - run: npm ci
+
+      # 5. ビルド
+      - run: npm run build
+
+      # 成果物をワークスペースに保持
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-build
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # 成果物を取得
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-build
+          path: dist
+
+      # 本番用デプロイ（mainブランチ時のみ実行）
+      - name: Deploy to Production
+        if: github.ref == 'refs/heads/main'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist
+          server-dir: ${{ secrets.FTP_DIR }}
+          state-name: .ftp-deploy-sync-state.json
+
+      # ステージング用デプロイ（developブランチ時のみ実行）
+      - name: Deploy to Staging
+        if: github.ref == 'refs/heads/develop'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist
+          server-dir: ${{ secrets.FTP_DIR_STG }}
+          state-name: .ftp-deploy-sync-state.json
+
+      # stateファイルの保存（差分管理用）
+      - uses: actions/cache@v4
+        with:
+          path: .ftp-deploy-sync-state.json
+          key: ftp-state-${{ github.ref_name }}-${{ github.run_id }}
