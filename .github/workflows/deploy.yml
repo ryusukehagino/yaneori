@@ -1,19 +1,14 @@
 name: 自動デプロイ設定
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
       - develop
   repository_dispatch:
-    types: [update]
-    branches:
-      - main
-      - develop
-  workflow_dispatch:
-    branches:
-      - main
-      - develop
+    types:
+      - rebuild_site
 
 jobs:
   build:
