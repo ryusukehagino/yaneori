@@ -44,6 +44,9 @@ jobs:
 
       # 5. ビルド
       - run: npm run build --verbose
+        env:
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
 
       # 成果物をワークスペースに保持
       - name: Upload build artifacts
