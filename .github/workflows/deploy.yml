@@ -62,7 +62,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          local-dir: ./dist
+          local-dir: ./dist/
           server-dir: ${{ secrets.FTP_DIR }}
           state-name: .ftp-deploy-sync-state.json
 
@@ -75,7 +75,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          local-dir: ./dist
+          local-dir: ./dist/
           server-dir: ${{ secrets.FTP_DIR_STG }}
           state-name: .ftp-deploy-sync-state.json
 
