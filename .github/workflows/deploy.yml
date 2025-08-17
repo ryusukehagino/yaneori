@@ -6,9 +6,9 @@ on:
     branches:
       - main
       - develop
-  repository_dispatch:
-    types:
-      - rebuild_site
+  # repository_dispatch:
+  #   types:
+  #     - rebuild_site
 
 jobs:
   build:
