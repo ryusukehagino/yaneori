@@ -1,0 +1,61 @@
+---
+/**
+ * カテゴリリスト
+ */
+interface Category {
+    href: string;
+    name: string;
+    current: boolean;
+}
+
+interface Props {
+    categories: Category[];
+    addClass?: string|string[];
+}
+
+const { categories = [], addClass = '' } = Astro.props;
+---
+<div class:list={['categoryList', addClass]}>
+    {categories.map((category) => (
+        <a
+        href={category.href}
+        class:list={[
+            "category",
+            category.current === true ? 'is_current' : ''
+        ]}>
+            {category.name}
+        </a>
+    ))}
+</div>
+
+
+<style lang="scss">
+.categoryList {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: g.$color_white;
+    border: 1px solid g.$color_border;
+    border-radius: 30px;
+    
+    &.is_current, &:hover {
+        opacity: 1;
+        color: g.$color_white;
+        background-color: g.$color_key;
+        border-color: g.$color_key;
+    }
+    
+    &.is_current {
+        pointer-events: none;
+    }
+}
+</style>

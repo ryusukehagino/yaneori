@@ -1,0 +1,142 @@
+---
+/**
+ * Wysiwyg
+ */
+interface Props {
+    addClass?: string|string[];
+}
+
+const { addClass = '' } = Astro.props;
+---
+<div class:list={['wysiwyg', addClass]}>
+    <slot />
+</div>
+
+
+<style lang="scss">
+.wysiwyg {
+    :global(h1),
+    :global(h2),
+    :global(h3) {
+        margin-top: 1em;
+        font-weight: bold;
+    }
+
+    :global(h1) {
+        font-size: min(g.get_vw(25), 4rem);
+    }
+
+    :global(h2) {
+        font-size: min(g.get_vw(22), 2.8rem);
+    }
+
+    :global(h3) {
+        font-size: min(g.get_vw(18), 2rem);
+    }
+
+    :global(> p) {
+        margin-top: 1em;
+
+        :global(strong) {
+            font-weight: bold;
+        }
+
+        :global(a) {
+            display: inline-block;
+            color: g.$color_link;
+            text-decoration: underline;
+            
+            &[target="_blank"] {
+                display: inline-flex;
+
+                &::after {
+                    content: '';
+                    width: 1.5em;
+                    aspect-ratio: 1;
+                    margin: auto;
+                    filter: g.$svg_color_link;
+                    background: url('/img/common/icon_tab.svg') no-repeat border-box center/contain;
+                }
+            }
+        }
+
+        :global(code) {
+            display: inline-block;
+            padding-inline: 0.7em;
+            margin-inline: 0.3em;
+            font-style: 1.4rem;
+            color: g.$color_base_light;
+            background-color: #F2F2F2;
+        }
+    }
+
+    :global(> div),
+    :global(> ul),
+    :global(> ol),
+    :global(> figure),
+    :global(> table) {
+        margin-top: 20px;
+    }
+
+    :global(figure) {
+        :global(a) {
+            display: block;
+        }
+
+        :global(figcaption) {
+            margin-top: 5px;
+            font-size: 1.2rem;
+        }
+    }
+
+    :global(pre) {
+        margin-top: 0;
+
+        :global(code) {
+            display: block;
+            padding: 1em;
+            color: g.$color_white;
+            background-color: g.$color_black;
+        }
+    }
+
+
+    :global(ul),
+    :global(ol) {
+        padding-left: 1em;
+
+        :global(li) {
+            margin-left: 1em;
+        }
+    }
+
+    :global(ul) {
+        :global(li) {
+            list-style-type: disc;
+        }
+    }
+
+    :global(ol) {
+        :global(li) {
+            list-style-type: decimal;
+        }
+    }
+
+    :global(table) {
+        width: 100%;
+        border: 1px solid g.$color_border;
+        border-collapse: collapse;
+        
+        :global(th),
+        :global(td) {
+            padding: 1em;
+            border: 1px solid g.$color_border;
+            background-color: g.$color_white;
+        }
+
+        :global(th) {
+            font-weight: bold;
+        }
+    }
+}
+</style>

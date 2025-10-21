@@ -9,7 +9,7 @@ interface Props {
 const { addClass = '' } = Astro.props;
 
 ---
-<span class="textMerker"><slot/></span>
+<span class:list={["textMerker", addClass]}><slot/></span>
 
 
 <style lang="scss">

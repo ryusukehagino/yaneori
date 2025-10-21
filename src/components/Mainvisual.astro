@@ -16,7 +16,7 @@ const { addClass = '' } = Astro.props;
             <span class="mainvisual_title_main"><slot/></span>
             <span class="mainvisual_title_sub"><slot name="sub"/></span>
         </h1>
-        <p><slot name="text" /></p>
+        <p class="mainvisual_text"><slot name="text" /></p>
     </div>
 </div>
 
@@ -72,7 +72,6 @@ const { addClass = '' } = Astro.props;
         font-size: min(g.get_vw(16), 1.8rem);
         font-weight: 500;
         text-align: center;
-        color: g.$color_white;
     }
 }
 </style>

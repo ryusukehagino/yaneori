@@ -2,187 +2,357 @@
 /********************************************************************
  * 	コンポーネント集
  **********************************************************************/
-import Layout from '@layouts/Layout.astro';
-import Inner from '@components/Inner.astro';
-import Title from '@components/Title.astro';
-import Subtitle from '@components/Subtitle.astro';
-import Btn from '@components/Btn.astro';
-import Logo from '@components/Logo.astro';
-import Link from '@components/Link.astro';
-import SliderFlow from '@components/SliderFlow.astro';
+import Layout from "@layouts/Layout.astro";
+import ContentsBox from "@layouts/ContentsBox.astro";
+import Inner from "@layouts/Inner.astro";
+import Mainvisual from "@components/Mainvisual.astro";
+import Title from "@components/Title.astro";
+import Subtitle from "@components/Subtitle.astro";
+import Btn from "@components/Btn.astro";
+import Logo from "@components/Logo.astro";
+import Sns from "@components/Sns.astro";
+import Link from "@components/Link.astro";
+import TextMerker from "@components/TextMerker.astro";
+import SliderFlow from "@components/SliderFlow.astro";
+import CategoryList from "@components/CategoryList.astro";
+import ArticleList from "@components/ArticleList.astro";
+import Wysiwyg from "@components/Wysiwyg.astro";
 
 const meta = {
-	title: 'コンポーネント集',
-	description: '',
-}
+	title: "コンポーネント集",
+	description: "",
+};
 ---
 
 <Layout title={meta.title} description={meta.description}>
 	<h1 class="comp-page-tit">コンポーネント集</h1>
 
+	<!-- # =================== メインビジュアル ================= # -->
+	<h2 class="comp-tit">メインビジュアル</h2>
+
+	<Mainvisual>
+		<Fragment>タイトル</Fragment>
+		<Fragment slot="sub">/ TITLE</Fragment>
+		<Fragment slot="text"
+			>テキストテキストテキストテキストテキストテキスト</Fragment
+		>
+	</Mainvisual>
+
+	<br /><br /><br />
+
+	<!-- # =================== 白板 ================= # -->
+	<h2 class="comp-tit">白板</h2>
+
+	<ContentsBox> 白板 </ContentsBox>
+
+	<br /><br /><br />
+
 	<!-- # =================== インナー ================= # -->
 	<h2 class="comp-tit">インナー</h2>
 
-	<Inner>
-		通常
-	</Inner>
+	<Inner> 通常 </Inner>
 
-	<Inner addClass="is_small">
-		小さい
-	</Inner>
+	<Inner addClass="is_small"> 小さい </Inner>
 
-	<Inner addClass="is_pc">
-		PCのみ
-	</Inner>
+	<Inner addClass="is_pc"> PCのみ </Inner>
 
-	<Inner addClass="is_sp">
-		SPのみ
-	</Inner>
+	<Inner addClass="is_sp"> SPのみ </Inner>
 
-	<br><br><br>
+	<br /><br /><br />
 
 	<!-- # =================== ロゴ ================= # -->
 	<h2 class="comp-tit">ロゴ</h2>
 
 	<Inner>
-
 		<Logo />
-
 	</Inner>
 
-	<br><br><br>
-	
+	<br /><br /><br />
+
+	<!-- # =================== SNSアイコン ================= # -->
+	<h2 class="comp-tit">SNSアイコン</h2>
+
+	<Inner>
+		<Sns />
+	</Inner>
+
+	<br /><br /><br />
+
 	<!-- # =================== タイトル ================= # -->
 	<h2 class="comp-tit">タイトル</h2>
 	<Inner>
-
-		<Title>タイトル</Title>
-		
-		<br>
-
 		<Title>
-			<Fragment name="default">タイトル</Fragment>
-			<Fragment name="sub">TITLE</Fragment>
+			<Fragment>タイトル</Fragment>
+			<Fragment slot="sub">/ TITLE</Fragment>
 		</Title>
-		
-		<br>
 
-		<Title addClass="is_center">中央寄せ</Title>
+		<br />
 
+		<Title addClass="is_center">
+			<Fragment>中央寄せ</Fragment>
+			<Fragment slot="sub"> / CENTER</Fragment>
+		</Title>
 	</Inner>
 
-	<br><br><br>
+	<br /><br /><br />
 
 	<!-- # =================== サブタイトル ================= # -->
 	<h2 class="comp-tit">サブタイトル</h2>
 	<Inner>
-
 		<Subtitle>サブタイトル</Subtitle>
-		
-		<br>
 
-		<Subtitle addClass="is_center">中央寄せ</Subtitle>
-
-		<br>
-
-		<Subtitle addClass="is_right">右寄せ</Subtitle>
-
-		<br>
-
-		<Subtitle addClass="is_md_center">PC中央寄せ</Subtitle>
-
-		<br>
-
-		<Subtitle addClass="is_md_right">PC右寄せ</Subtitle>
-
-		<br>
-		
-		<Subtitle bgColor="#f0f0f0">背景色指定</Subtitle>
-
-		<br>
-
+		<br />
 	</Inner>
 
-	<br><br><br>
+	<br /><br /><br />
 
 	<!-- # =================== テキストリンク ================= # -->
 	<h2 class="comp-tit">テキストリンク</h2>
 	<Inner>
-
 		<Link href="#">テキストリンク</Link>
 
-		<br>
+		<br />
 
 		<Link href="https://#">外部リンク</Link>
 
-		<br>
-
+		<br />
 	</Inner>
 
-	<br><br><br>
+	<br /><br /><br />
+
+	<!-- # =================== マーカー ================= # -->
+	<h2 class="comp-tit">マーカー</h2>
+	<Inner>
+		<TextMerker>マーカー</TextMerker>
+
+		<br />
+	</Inner>
+
+	<br /><br /><br />
 
 	<!-- # =================== ボタン ================= # -->
 	<h2 class="comp-tit">ボタン</h2>
 	<Inner>
 		<Btn href="#">ボタン</Btn>
 
-		<br>
-	
+		<br />
+
 		<Btn href="https://#">別タブ</Btn>
 
-		<br>
+		<br />
 
 		<Btn href="mailto:">メール</Btn>
 
-		<br>
-
+		<br />
 	</Inner>
 
-	<br><br><br>
+	<br /><br /><br />
 
 	<!-- # =================== 無限スライダー ================= # -->
 	<h2 class="comp-tit">無限スライダー</h2>
 	<Inner>
-
-		<SliderFlow srcList={[
-			"top/bottom_slide_01.webp",
-			"top/bottom_slide_02.webp",
-			"top/bottom_slide_03.webp",
-			"top/bottom_slide_04.webp",
-			"top/bottom_slide_05.webp",
-			"top/bottom_slide_06.webp",
-			"top/bottom_slide_07.webp",
-			"top/bottom_slide_08.webp",
-		]}>
-
+		<SliderFlow
+			srcList={[
+				"top/bottom_slide_01.webp",
+				"top/bottom_slide_02.webp",
+				"top/bottom_slide_03.webp",
+				"top/bottom_slide_04.webp",
+				"top/bottom_slide_05.webp",
+				"top/bottom_slide_06.webp",
+				"top/bottom_slide_07.webp",
+				"top/bottom_slide_08.webp",
+			]}
+		/>
 	</Inner>
 
-	<br><br><br>
+	<br /><br /><br />
 
+	<!-- # =================== カテゴリリスト ================= # -->
+	<h2 class="comp-tit">カテゴリリスト</h2>
+	<Inner>
+		<CategoryList
+			categories={[
+				{
+					href: "#",
+					name: "すべて",
+					current: true,
+				},
+				{
+					href: "#",
+					name: "カテゴリ1",
+					current: false,
+				},
+				{
+					href: "#",
+					name: "カテゴリ2",
+					current: false,
+				},
+				{
+					href: "#",
+					name: "カテゴリ3",
+					current: false,
+				},
+			]}
+		/>
+	</Inner>
+
+	<br /><br /><br />
+
+	<!-- # =================== 記事リスト ================= # -->
+	<h2 class="comp-tit">記事リスト</h2>
+	<Inner>
+		<ArticleList
+			posts={[
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル1",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					category: "カテゴリ1",
+					tags: ["カテゴリ1-1"],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル2",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					category: "カテゴリ2",
+					tags: ["カテゴリ2-1"],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル3",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					category: "カテゴリ1",
+					tags: [],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル4",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					category: "カテゴリ2",
+					tags: [],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル5",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					category: "カテゴリ2",
+					tags: [],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル6",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					category: "カテゴリ2",
+					tags: [],
+				},
+			]}
+		/>
+	</Inner>
+
+	<br /><br /><br />
+
+	<!-- # =================== Wysiwyg ================= # -->
+	<h2 class="comp-tit">Wysiwyg</h2>
+	<Inner>
+		<Wysiwyg>
+			<p>
+				テキストテキストテキストテキスト<br
+				/>テキストテキストテキストテキスト
+			</p>
+			<p>
+				<strong>テキストテキストテキストテキストテキスト</strong>
+			</p>
+			<p>
+				<u>テキストテキストテキストテキスト</u>
+			</p>
+			<p>
+				<span style="color: #ff0000">テキストテキストテキストテキスト</span>
+			</p>
+			<h1 id="h6aad7d63ec">見出し１</h1>
+			<h2 id="h09c73c8cc0">見出し２</h2>
+			<h3 id="hc3ac443ef2">見出し３</h3>
+			<p>
+				<code>&lt;div class="app"&gt;test&lt;/div&gt;</code>
+			</p>
+			<div data-filename="test.html">
+				<pre>
+					<code class="language-html">&lt;div class="app"&gt;test&lt;/div&gt;</code>
+				</pre>
+			</div>
+			<table>
+				<tbody>
+					<tr>
+						<th colspan="1" rowspan="1"><p>title1</p></th>
+						<th colspan="1" rowspan="1"><p>title2</p></th>
+						<th colspan="1" rowspan="1"><p>title3</p></th>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1"><p>row1</p></td>
+						<td colspan="1" rowspan="1"><p>row2</p></td>
+						<td colspan="1" rowspan="1"><p>row3</p></td>
+					</tr>
+				</tbody>
+			</table>
+			<ul>
+				<li>list1</li>
+				<li>list2</li>
+				<li>list3</li>
+			</ul>
+			<ol>
+				<li>list1</li>
+				<li>list2</li>
+				<li>list3</li>
+			</ol>
+			<p><a href="/aaa/">リンク</a></p>
+			<figure>
+				<a href="/linktest/" target="_blank" rel="noopener noreferrer nofollow">
+					<img src="https://images.microcms-assets.io/assets/66c8ec9725004218926cbecbc38e51fa/b5b70982162a4b2c8fdf24b029d22a24/1000x1000.png" alt="alttest" width="1000" height="1000"/>
+				</a>
+				<figcaption>captiontest</figcaption>
+			</figure>
+			<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+				<iframe
+					src="https://www.youtube.com/embed/TAblcmADMaM?rel=0"
+					style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;"
+					allowfullscreen=""
+					scrolling="no"
+					allow="accelerometer *; clipboard-write *; encrypted-media *; gyroscope *; picture-in-picture *; web-share *;"
+				></iframe>
+			</div>
+		</Wysiwyg>
+	</Inner>
+
+	<br /><br /><br />
 </Layout>
 
 <style lang="scss">
-.comp-page-tit {
-    padding: 25px 0 35px;
-    font-size: 3.8rem;
-    font-weight: bold;
-    text-align: center;
-}
-.comp-tit {
-    width: min(g.$inner_min, g.$inner_max);
-    margin-inline: auto;
-    font-size: 3.2rem;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #000;
-}
-.comp-tit {
-    width: min(g.$inner_min, g.$inner_max);
-    margin-inline: auto;
-    font-size: 2.4rem;
-    margin-bottom: 15px;
-}
-.comp-bg {
-    padding: 20px 0;
-    background-color: #000;
-}
+	.comp-page-tit {
+		padding: 25px 0 35px;
+		font-size: 3.8rem;
+		font-weight: bold;
+		text-align: center;
+	}
+	.comp-tit {
+		width: min(g.$inner_min, g.$inner_max);
+		margin-inline: auto;
+		font-size: 3.2rem;
+		margin-bottom: 15px;
+		border-bottom: 1px solid #000;
+	}
+	.comp-tit {
+		width: min(g.$inner_min, g.$inner_max);
+		margin-inline: auto;
+		font-size: 2.4rem;
+		margin-bottom: 15px;
+	}
+	.comp-bg {
+		padding: 20px 0;
+		background-color: #000;
+	}
 </style>

@@ -32,7 +32,7 @@ const response = await fetchBlogDetail('works', slug as string);
 	<ContentsBox>
 		id: {response.id} <br>
 		title: {response.title} <br>
-		content: {response.content}
+		<div set:html={response.content}></div>
 	</ContentsBox>
 </Layout>
 

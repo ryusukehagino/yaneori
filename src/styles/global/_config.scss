@@ -22,6 +22,7 @@ $font_dots: "DotGothic16", sans-serif;
 $color_base: #333;
 $color_base_light: #666;
 $color_white: #fff;
+$color_black: #000;
 $color_key: #002fa7;
 $color_link: #6B95FF;
 $color_accent: #C80F20;
@@ -36,6 +37,7 @@ $svg_color_key: invert(12%) sepia(53%) saturate(7499%) hue-rotate(226deg) bright
 $svg_color_link: invert(77%) sepia(61%) saturate(5779%) hue-rotate(200deg) brightness(101%) contrast(101%);
 
 // 重ね順
+$z_index_loading: 1002;
 $z_index_gnav: 1001;
 $z_index_header: 1000;
 

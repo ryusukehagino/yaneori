@@ -1,0 +1,107 @@
+---
+/**
+ * 記事リスト
+ */
+interface Post {
+    href: string;
+    img: string;
+    title: string;
+    text: string;
+    category: string;
+    tags: string[];
+}
+
+interface Props {
+    posts: Post[];
+    addClass?: string|string[];
+}
+
+const { posts = [], addClass = '' } = Astro.props;
+---
+<div class:list={['articleList', addClass]}>
+    {posts.map((post) => (
+        <a href={post.href} class="article" data-category={post.category}>
+            <figure class="article_img">
+                <img src={post.img} alt={post.title} width="" height="" />
+            </figure>
+            <dl class="article_textArea">
+                <dt>{post.title}</dt>
+                <dd>{post.text}</dd>
+            </dl>
+            <ul class="article_categories">
+                <li>{post.category}</li>
+                {post.tags.map((tag) => (
+                    <li>{tag}</li>
+                ))}
+            </ul>
+        </a>
+    ))}
+</div>
+
+
+<style lang="scss">
+.articleList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.article {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 30px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(#000, 0.2);
+    background-color: g.$color_white;
+
+    &_img {
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            transition: scale 0.3s;
+        }
+    }
+
+    &:hover {
+        &_img {
+            img {
+                scale: 1.05;
+            }
+        }
+    }
+
+    &_textArea {
+        flex: 1;
+        margin-top: 10px;
+        padding-inline: 10px;
+
+        dt {
+            font-size: min(g.get_vw(18), 2rem);
+            font-weight: 500;
+        }
+
+        dd {
+            margin-top: 5px;
+            font-size: 1.4rem;
+        }
+    }
+    
+    &_categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+        
+        li {
+            font-size: 1.4rem;
+            padding: 0.5em 1em;
+            border-radius: 100vmax;
+            border: 1px solid g.$color_border;
+        }
+    }
+}
+</style>

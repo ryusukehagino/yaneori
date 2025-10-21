@@ -28,7 +28,8 @@ const isExternalLink = href.includes('http');
     width: fit-content;
     padding: 0 3em 0 2em;
     height: 50px;
-    border: 1px solid g.$color_base;
+    background-color: g.$color_white;
+    border: 1px solid g.$color_border;
 
     &::before {
         @include g.arrow(right, 10px, 2px, g.$color_base);
