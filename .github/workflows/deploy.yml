@@ -2,13 +2,13 @@ name: 自動デプロイ設定
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - develop
-  repository_dispatch:
-    types:
-      - rebuild_site
+  # push:
+  #   branches:
+  #     - main
+  #     - develop
+  # repository_dispatch:
+  #   types:
+  #     - rebuild_site
 
 jobs:
   build:
