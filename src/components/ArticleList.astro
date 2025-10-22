@@ -7,8 +7,8 @@ interface Post {
     img: string;
     title: string;
     text: string;
-    category: string;
-    tags: string[];
+    date: string;
+    categories: string[];
 }
 
 interface Props {
@@ -20,19 +20,27 @@ const { posts = [], addClass = '' } = Astro.props;
 ---
 <div class:list={['articleList', addClass]}>
     {posts.map((post) => (
-        <a href={post.href} class="article" data-category={post.category}>
+        <a href={post.href} class="article" data-category={post.categories ? post.categories[0] : ''}>
             <figure class="article_img">
-                <img src={post.img} alt={post.title} width="" height="" />
+                <img src={post.img ? post.img : '/img/common/noimage.webp'} alt={post.title} width="" height="" />
             </figure>
             <dl class="article_textArea">
-                <dt>{post.title}</dt>
-                <dd>{post.text}</dd>
+                <dt class="article_head">
+                    <div class="article_title">{post.title}</div>
+                    <div class="article_date">{post.date}</div>
+                </dt>
+                <dd class="article_body">{post.text}</dd>
             </dl>
             <ul class="article_categories">
-                <li>{post.category}</li>
-                {post.tags.map((tag) => (
-                    <li>{tag}</li>
-                ))}
+                {() => {
+                    if (post.categories) {
+                        return (
+                            post.categories.map((category) => (
+                                <li>{category}</li>
+                            ))
+                        )
+                    }
+                }}
             </ul>
         </a>
     ))}
@@ -49,7 +57,7 @@ const { posts = [], addClass = '' } = Astro.props;
 .article {
     display: flex;
     flex-direction: column;
-    padding: 10px 10px 30px;
+    padding: 10px 10px 20px;
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(#000, 0.2);
@@ -76,30 +84,41 @@ const { posts = [], addClass = '' } = Astro.props;
 
     &_textArea {
         flex: 1;
+        margin-top: 15px;
+        padding-inline: 5px;
+    }
+    
+    &_head {
+        display: flex;
+        align-items: baseline;
+        gap: 1.2em;
+    }
+    
+    &_title {
+        font-size: min(g.get_vw(18), 2rem);
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    &_date {
+        font-size: 1.4rem;
+    }
+    
+    &_body {
         margin-top: 10px;
-        padding-inline: 10px;
-
-        dt {
-            font-size: min(g.get_vw(18), 2rem);
-            font-weight: 500;
-        }
-
-        dd {
-            margin-top: 5px;
-            font-size: 1.4rem;
-        }
+        font-size: 1.4rem;
     }
     
     &_categories {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        margin-top: 20px;
+        margin-top: 30px;
         
         li {
-            font-size: 1.4rem;
-            padding: 0.5em 1em;
-            border-radius: 100vmax;
+            font-size: 1.2rem;
+            padding: 0.2em 0.5em;
+            border-radius: 5px;
             border: 1px solid g.$color_border;
         }
     }
