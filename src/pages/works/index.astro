@@ -6,10 +6,26 @@ import {IMG_PATH} from '../../consts.js';
 import Layout from '@layouts/Layout.astro';
 import Mainvisual from '@components/Mainvisual.astro';
 import ContentsBox from '@layouts/ContentsBox.astro';
+import CategoryList from "@components/CategoryList.astro";
+import ArticleList from "@components/ArticleList.astro";
 import Btn from '@components/Btn.astro';
-import {fetchBlogs} from "@scripts/microcms";
+import {fetchBlogs, fetchBlogDetail} from "@scripts/microcms";
+
+
+
+const categories = await fetchBlogs('works_category');
+const parentCat = [];
+for (let i = 0; i < categories.contents.length; i++) {
+	const category = categories.contents[i];
+	if (category.parent !== null) continue;
+	parentCat.push({id: category.id, name: category.title})
+}
 
 const response = await fetchBlogs('works');
+
+// const test = await fetchBlogDetail('works_category', 'ambient');
+// console.log(test);
+
 ---
 
 <Layout>
@@ -18,13 +34,75 @@ const response = await fetchBlogs('works');
 		<Fragment slot="sub">/ works</Fragment>
 	</Mainvisual>
 	<ContentsBox>
-		<ul>
+		<CategoryList categories={parentCat}/>
+		<!-- <ul>
 			{response.contents.map((val: any) => (
 				<li>
 					<a href={"/works/" + val.id}>{val.title}</a>
 				</li>
 			))}
-		</ul>
+		</ul> -->
+		<ArticleList
+			posts={[
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル1",
+					date: "2025/00/00",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					categories: [
+						{id: 'cat1', title: 'カテゴリ1'},
+						{id: 'cat1-1', title: 'カテゴリ1-1'},
+					],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル2",
+					date: "2025/00/00",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					categories: [
+						{id: 'cat2', title: 'カテゴリ1'},
+						{id: 'cat2-1', title: 'カテゴリ2-1'},
+						{id: 'cat2-2', title: 'カテゴリ2-2'},
+					],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル3",
+					date: "2025/00/00",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					categories: [
+						{id: 'cat3', title: 'カテゴリ3'},
+					],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル4記事タイトル4",
+					date: "2025/00/00",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					categories: [
+						{id: 'cat1', title: 'カテゴリ1'},
+					],
+				},
+				{
+					href: "#",
+					img: "https://placehold.jp/750x750.png",
+					title: "記事タイトル5記事タイトル5記事タイトル5",
+					date: "2025/00/00",
+					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					categories: [
+						{id: 'cat1', title: 'カテゴリ1'},
+					],
+				},
+				{
+					href: "#",
+					title: "記事タイトル6",
+				},
+			]}
+		/>
 	</ContentsBox>
 </Layout>
 
@@ -35,10 +113,8 @@ const response = await fetchBlogs('works');
 	}
 }
 
-ul li {
-	&:not(:first-of-type) {
-		margin-top: 30px;
-	}
+:global(.articleList) {
+	margin-top: min(g.get_vw(50), 80px);
 }
 
 :global(.footer) {
@@ -47,3 +123,34 @@ ul li {
 	}
 }
 </style>
+
+<script>
+const catList = document.querySelectorAll('.js_category');
+const articleList = document.querySelectorAll('.js_article');
+
+// カテゴリにクリックイベントを追加
+catList.forEach(cat => {
+	cat.addEventListener('click', (e) => doWhenClickedCat(e));
+});
+
+/**
+ * カテゴリをクリックしたら発火
+ */
+const doWhenClickedCat = (e) => {
+	const target = e.target;
+	const targetId = target.dataset.id;
+
+	// クリックした要素にアクティブクラスを付与
+	catList.forEach(cat => {
+		cat.classList.remove('is_current');
+	});
+	target.classList.add('is_current');
+
+	// クリックしたカテゴリ以外の記事を非表示
+	articleList.forEach(article => {
+		
+	});
+}
+
+
+</script>

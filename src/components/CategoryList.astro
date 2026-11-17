@@ -3,9 +3,8 @@
  * カテゴリリスト
  */
 interface Category {
-    href: string;
+    id: string;
     name: string;
-    current: boolean;
 }
 
 interface Props {
@@ -16,15 +15,9 @@ interface Props {
 const { categories = [], addClass = '' } = Astro.props;
 ---
 <div class:list={['categoryList', addClass]}>
+    <a class="category js_category is_current" data-id="">すべて</a>
     {categories.map((category) => (
-        <a
-        href={category.href}
-        class:list={[
-            "category",
-            category.current === true ? 'is_current' : ''
-        ]}>
-            {category.name}
-        </a>
+        <a class="category js_category" data-id={category.id}>{category.name}</a>
     ))}
 </div>
 

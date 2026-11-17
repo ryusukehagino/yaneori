@@ -173,24 +173,16 @@ const meta = {
 		<CategoryList
 			categories={[
 				{
-					href: "#",
-					name: "すべて",
-					current: true,
-				},
-				{
-					href: "#",
+					id: "cat1",
 					name: "カテゴリ1",
-					current: false,
 				},
 				{
-					href: "#",
+					id: "cat2",
 					name: "カテゴリ2",
-					current: false,
 				},
 				{
-					href: "#",
+					id: "cat3",
 					name: "カテゴリ3",
-					current: false,
 				},
 			]}
 		/>
@@ -209,7 +201,10 @@ const meta = {
 					title: "記事タイトル1",
 					date: "2025/00/00",
 					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
-					categories: ["カテゴリ1", "カテゴリ1-1"],
+					categories: [
+						{id: 'cat1', title: 'カテゴリ1'},
+						{id: 'cat1-1', title: 'カテゴリ1-1'},
+					],
 				},
 				{
 					href: "#",
@@ -217,7 +212,11 @@ const meta = {
 					title: "記事タイトル2",
 					date: "2025/00/00",
 					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
-					categories: ["カテゴリ2", "カテゴリ2-1", "カテゴリ2-3"],
+					categories: [
+						{id: 'cat2', title: 'カテゴリ1'},
+						{id: 'cat2-1', title: 'カテゴリ2-1'},
+						{id: 'cat2-2', title: 'カテゴリ2-2'},
+					],
 				},
 				{
 					href: "#",
@@ -225,7 +224,9 @@ const meta = {
 					title: "記事タイトル3",
 					date: "2025/00/00",
 					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
-					categories: ["カテゴリ3"],
+					categories: [
+						{id: 'cat3', title: 'カテゴリ3'},
+					],
 				},
 				{
 					href: "#",
@@ -233,7 +234,9 @@ const meta = {
 					title: "記事タイトル4記事タイトル4",
 					date: "2025/00/00",
 					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
-					categories: ["カテゴリ1"],
+					categories: [
+						{id: 'cat1', title: 'カテゴリ1'},
+					],
 				},
 				{
 					href: "#",
@@ -241,8 +244,9 @@ const meta = {
 					title: "記事タイトル5記事タイトル5記事タイトル5",
 					date: "2025/00/00",
 					text: "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト",
-					categories: ["カテゴリ1"],
-					
+					categories: [
+						{id: 'cat1', title: 'カテゴリ1'},
+					],
 				},
 				{
 					href: "#",

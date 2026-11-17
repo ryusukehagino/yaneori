@@ -2,25 +2,30 @@
 /**
  * 記事リスト
  */
+interface Props {
+    posts: Post[];
+    addClass?: string|string[];
+}
+
 interface Post {
     href: string;
     img: string;
     title: string;
     text: string;
     date: string;
-    categories: string[];
+    categories: Category[];
 }
 
-interface Props {
-    posts: Post[];
-    addClass?: string|string[];
+interface Category {
+    id: string;
+    title: string;
 }
 
 const { posts = [], addClass = '' } = Astro.props;
 ---
 <div class:list={['articleList', addClass]}>
     {posts.map((post) => (
-        <a href={post.href} class="article" data-category={post.categories ? post.categories[0] : ''}>
+        <a href={post.href} class="article js_article" data-category={post.categories ? post.categories[0].id : ''}>
             <figure class="article_img">
                 <img src={post.img ? post.img : '/img/common/noimage.webp'} alt={post.title} width="" height="" />
             </figure>
@@ -36,7 +41,7 @@ const { posts = [], addClass = '' } = Astro.props;
                     if (post.categories) {
                         return (
                             post.categories.map((category) => (
-                                <li>{category}</li>
+                                <li>{category.title}</li>
                             ))
                         )
                     }
@@ -62,6 +67,12 @@ const { posts = [], addClass = '' } = Astro.props;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(#000, 0.2);
     background-color: g.$color_white;
+
+    &.is_hidden {
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+    }
 
     &_img {
         overflow: hidden;
